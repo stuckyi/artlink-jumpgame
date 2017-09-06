@@ -6,28 +6,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
     <script src="../p5.play.js"></script>
-     <!--<script src="sketch.js"></script>  origin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="_event.js"></script>
     <script src="_base.js"></script>
 
-    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+
+    <link rel="stylesheet" type="text/css" href="style.css">
   <style>
   
    body {padding: 0; margin: 0;}
    
-   #canvasContainer {
+   #gameV {
      width: 100%;
      height: auto;
+     /*display:none;*/
    }
    canvas { margin: 6% 33%; }
-
-   #msg-start { text-align: center; background-color: gold; position: absolute; font-size: 4rem; margin-left: 33%; margin-top: 6%; }
-
-
   </style>
   </head>
   <body>
-  <!--<div id="msg-start"> 게임 시작 </div>
-  <div id="msg-re-start"> 다시하기 </div>-->
+  <div id="mainV">
+    <p>장애물 점프 메인이미지</p>
+    <p> 화면을 클릭하세요 Click (깜빡이기)</p>
+  </div>
+  <div id="chooseV">
+    <div class="column has-text-centered">
+      <p class="title is-1">Character Select</p>
+    </div>
+  </div>
+  <div id="gameV"></div>
+  <div id="resultV"></div>
+
   <div id="canvasContainer"> </div>
   </body>
 </html>

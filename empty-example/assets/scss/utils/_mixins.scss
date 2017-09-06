@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin min-size($min-width, $min-height) {
+  min-width: $min-width;
+  min-height: $min-height;
+}
+
+@mixin max-size($max-width, $max-height) {
+  max-width: $max-width;
+  max-height: $max-height;
+}
+
+@mixin margin($top, $right, $bottom, $left) {
+  margin-top: $top;
+  margin-right: $right;
+  margin-bottom: $bottom;
+  margin-left: $left;
+}
+
+@mixin flex($display, $flex-flow) {
+  display: $display;
+  flex-flow: $flex-flow;
+}
+
+
+
+@mixin typo($size, $weight, $line-height, $spacing, $align){
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height;
+    letter-spacing: $spacing;
+    text-align: $align;
+}
+
+
+@mixin transform-origin($x-axis, $y-axis, $z-axis){
+  transform-origin: $x-axis $y-axis $z-axis;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+
+@mixin border-top-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+   -webkit-border-top-left-radius: $radius;
+   border-top-left-radius: $radius;
+   background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+     -webkit-border-top-right-radius: $radius;
+     border-top-right-radius: $radius;
+     background-clip: padding-box;
+}
+@mixin border-bottom-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+   -webkit-border-bottom-left-radius: $radius;
+   border-bottom-left-radius: $radius;
+   background-clip: padding-box;
+}
+@mixin border-left-radius($radius) {
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+     -webkit-border-top-left-radius: $radius;
+     border-top-left-radius: $radius;
+     background-clip: padding-box;
+}
+
+
+
+
+@mixin testBorder($border-st: dashed){
+  border: .5px $border-st black;
+}
+@mixin testBg($colorname: rgba(236, 236, 236, 0.8)){
+  background-color: $colorname;
+}
+
+@mixin testShadow(){
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+@mixin testTransition(){
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+   }
+}
+
+
