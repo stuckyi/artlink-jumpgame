@@ -7,10 +7,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
     <script src="../p5.play.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="_event.js"></script>
+    <script src="_game.js"></script>
+    
     <script src="_base.js"></script>
     <script src="_choose.js"></script>
-    <script src="_game.js"></script>
+    
 
 
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -28,12 +29,24 @@
   </head>
   <body>
   <div id="mainV">
-    <p>장애물 점프 메인이미지</p>
-    <p> 화면을 클릭하세요 Click (깜빡이기)</p>
+    <section class="hero is-fullheight is-bold">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title text-stroke-box-white"> 장애물 점프 </h1>
+          <br/>
+          <h2 class="subtitle text-stroke-box-white">Click to Play</h2>
+        </div>
+      </div>
+      <div class="hero-foot has-text-centered text-stroke-box-white"> 
+        <p>COPYRIGHT 2017 MENNExSTUCKYI STUDIO</p>
+        <p> All Rights Reserved.</p>
+      </div>
+    </section>
+  
   </div>
   <div id="chooseV">
     <div class="column has-text-centered">
-      <p class="title is-1">Character Select</p>
+      <p class="title is-1 text-stroke-box">캐릭터를 선택하세요</p>
     </div>
   </div>
   <div id="gameV"></div>

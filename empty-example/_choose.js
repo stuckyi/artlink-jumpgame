@@ -93,6 +93,7 @@ function chooseViewInit() {
   charImg1.addClass('selectedImg');
   charImg1.size(100, 100);
   charImg2 = createImg(charInfo[1].imgUrl);
+  charImg2.size(100, 100);  
   charImg3 = createImg(charInfo[2].imgUrl);
   charImg4 = createImg(charInfo[3].imgUrl);
   charImg5 = createImg(charInfo[4].imgUrl);
@@ -126,9 +127,13 @@ function gameStart() {
         chooseV.hide();
         gameV.show();
         GLOBAL_MODE = 'gameV';
+        
+    }, 1000);
+    
+    setTimeout(function () {    
         새게임시작();
-     }, 1000);
-
+     }, 3000);
+    
     console.log("game Start with: " + selectedCharacter);
 }
 
@@ -186,7 +191,7 @@ function updateButtonState() {
 function viewMurphy() {
     selectedCharacter = 'murphy';
     ON_SELECTED = true;
-    charPos = -350; // reset
+    캐릭터위치.x = -350; // reset
 
     updateButtonState();    
 }
@@ -196,8 +201,35 @@ function viewMurphy() {
 function viewKitty() {
     selectedCharacter = 'kitty';
     ON_SELECTED = true;
-    charPos = -350; // reset
+    캐릭터위치.x = -350; // reset
 
     updateButtonState();
 }
 
+
+
+
+function MODE_CHOOSE() {
+  // 첫 지점까지 위치 이동
+
+  if (!isSelected) {
+    if (캐릭터위치.x < WINDOW_WIDTH / 5) { 캐릭터위치.x += 6; }  
+  } else {
+    캐릭터위치.x += 20;
+  }
+  
+  if (selectedCharacter === 'murphy') {
+    charImg1.position(캐릭터위치.x, 100);
+  } else if (selectedCharacter === 'kitty') {
+    charImg2.position(캐릭터위치.x, 200);
+  } else if (selectedCharacter === 'tulip') {
+    charImg3.position(캐릭터위치.x, 300);
+  } else if (selectedCharacter === 'violet') {
+    charImg4.position(캐릭터위치.x, 400);
+  } else if (selectedCharacter === 'bubblegirl') {
+    charImg5.position(캐릭터위치.x, 500);
+  } else {
+    console.log("선택한 캐릭터와 일치하는 이미지가 없습니다.");
+  }
+  
+}
