@@ -1,11 +1,18 @@
+// 사용자 인터페이스 환경
+var WINDOW_WIDTH = window.outerWidth;
+
+
+
 
 // 게임 모드 변경
 var GLOBAL_MODE = 'mainV'; // main, choose, game, result
 var mainV, chooseV, gameV, resultV;
 
 
+
+
 var ON_SELECTED = false;
-var charPos = -350;
+var 캐릭터위치 = { x: -350, y: 0 };
 
 
 //mouse click or x to flap
@@ -180,14 +187,23 @@ function draw() {
   
 } // drwar end
 
+var isSelected = false;
+
+
 
 function MODE_CHOOSE() {
-  charPos+=4;
+  // 첫 지점까지 위치 이동
+
+  if (!isSelected) {
+    if (캐릭터위치.x < WINDOW_WIDTH / 5) { 캐릭터위치.x += 6; }  
+  } else {
+    캐릭터위치.x += 20;
+  }
   
   if (selectedCharacter === 'murphy') {
-    charImg1.position(charPos, 100);  
+    charImg1.position(캐릭터위치.x, 100);  
   } else if (selectedCharacter === 'kitty') {
-    charImg2.position(charPos, 100);
+    charImg2.position(캐릭터위치.x, 100);
   }
   
 }
@@ -330,71 +346,6 @@ function 새게임시작() {
 
 
 
-var chooseBtn1,
-  chooseBtn2,
-  chooseBtn3,
-  chooseBtn4,
-  chooseBtn5;
-
-var charImg1, charImg2, charImg3, charImg4, charImg5;
-var charInfo = [
-  { fnName: viewMurphy, imgUrl: 'assets/source/side-murphy.png' },
-  { fnName: viewKitty, imgUrl: 'assets/source/side-kitty.png' },
-  { fnName: viewMurphy, imgUrl: 'assets/source/characters/murphy.png' },
-  { fnName: viewMurphy, imgUrl: 'assets/source/characters/murphy.png' },
-  { fnName: viewMurphy, imgUrl: 'assets/source/characters/murphy.png' }
-];
-
-function chooseViewInit() {
-  console.log("chooseViewInit");
-  //선택 버튼 생성
-  chooseBtn1 = createButton('슈파플렉스 머피');
-  chooseBtn1.position(500, 100);
-
-  chooseBtn2 = createButton('키티와 튤립 키티');
-  chooseBtn2.position(500, 200);
-
-  chooseBtn3 = createButton('키티와 튤립 튤립');
-  chooseBtn3.position(500, 300);
-  
-  chooseBtn4 = createButton('키티와 튤립 바이올렛');
-  chooseBtn4.position(500, 400);
-
-  chooseBtn5 = createButton('슈가맨 버블소녀 버블소녀');
-  chooseBtn5.position(500, 500);
-  
-  
-
-
-  // 버튼 공통 스타일, 함수 초기설정
-  var buttons = selectAll('button');
-  for (var btni = 0; btni < buttons.length; btni++){
-    buttons[btni].addClass('button');
-
-    buttons[btni].style('width', '300px');
-    buttons[btni].style('height', '100px');
-
-    buttons[btni].mousePressed(charInfo[btni].fnName); 
-  }
-  
-  
-  // 선택시 보여줄 이미지 초기 설정
-  charImg1 = createImg(charInfo[0].imgUrl);
-  charImg1.addClass('selectedImg');
-  charImg2 = createImg(charInfo[1].imgUrl);
-  charImg3 = createImg(charInfo[2].imgUrl);
-  charImg4 = createImg(charInfo[3].imgUrl);
-  charImg5 = createImg(charInfo[4].imgUrl);
-
-  
-  charImg1.hide();
-  charImg2.hide();
-  charImg3.hide();
-  charImg4.hide();
-  charImg5.hide();
-
-}
-
 
 
 function mousePressed() {
@@ -418,30 +369,6 @@ function mousePressed() {
   
 }
 
-
-
-function viewMurphy() {
-  ON_SELECTED = true;
-  charPos = -350; // reset
-  selectedCharacter = 'murphy';
-  charImg1.show();
-  charImg2.hide();
-  charImg3.hide();
-  charImg4.hide();
-  charImg5.hide();
-}
-
-var selectedCharacter = '';
-
-function viewKitty() {
-  charPos = -350; // reset
-  selectedCharacter = 'kitty';
-  charImg1.hide();
-  charImg2.show();
-  charImg3.hide();
-  charImg4.hide();
-  charImg5.hide();
-}
 
 
 
