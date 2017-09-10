@@ -1,5 +1,6 @@
 var selectedCharacter;
 
+
 var chooseBtn1,
   chooseBtn2,
   chooseBtn3,
@@ -31,21 +32,26 @@ function chooseViewInit() {
   //선택 버튼 생성
   chooseBtn1 = createButton('슈파플렉스 머피');
   chooseBtn1.position(500, 100);
+  chooseBtn1.addClass('chooseBtn');
 
   chooseBtn2 = createButton('키티와 튤립 키티');
   chooseBtn2.position(500, 200);
+  chooseBtn2.addClass('chooseBtn');
     
   chooseBtn3 = createButton('키티와 튤립 튤립');
   chooseBtn3.position(500, 300);
+  chooseBtn3.addClass('chooseBtn');
     
   chooseBtn4 = createButton('키티와 튤립 바이올렛');
   chooseBtn4.position(500, 400);
+  chooseBtn4.addClass('chooseBtn');
 
   chooseBtn5 = createButton('슈가맨 버블소녀 버블소녀');
   chooseBtn5.position(500, 500);
+  chooseBtn5.addClass('chooseBtn');
 
   // 버튼 공통 스타일, 함수 초기설정
-  var buttons = selectAll('button');
+  var buttons = selectAll('.chooseBtn');
   for (var btni = 0; btni < buttons.length; btni++){
     buttons[btni].addClass('button');
 
@@ -215,7 +221,7 @@ function MODE_CHOOSE() {
   if (!isSelected) {
     if (캐릭터위치.x < WINDOW_WIDTH / 5) { 캐릭터위치.x += 6; }  
   } else {
-    캐릭터위치.x += 20;
+    캐릭터위치.x += 30;
   }
   
   if (selectedCharacter === 'murphy') {

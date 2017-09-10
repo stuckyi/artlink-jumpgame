@@ -1,5 +1,7 @@
 // 사용자 인터페이스 환경
-var WINDOW_WIDTH = window.outerWidth;
+var WINDOW_WIDTH = window.outerWidth,
+    WINDOW_HEIGHT = window.outerHeight;
+
 
 
 
@@ -10,9 +12,13 @@ var mainV, chooseV, gameV, resultV;
 var isSelected = false;
 
 
-
+var 캐릭터크기 = {
+  choose: 300,
+  game: 100
+};
 var ON_SELECTED = false;
-var 캐릭터위치 = { x: -350, y: 0 };
+var 캐릭터위치 = { x: -350, y: 100, endX: (WINDOW_WIDTH+캐릭터크기.choose), endY: 100 };
+
 
 
 
@@ -66,6 +72,8 @@ function draw() {
   } else if (GLOBAL_MODE === 'chooseV' && ON_SELECTED === true) {
     MODE_CHOOSE();
   }
+
+  
   
 } // drwar end
 
@@ -85,7 +93,7 @@ function mousePressed() {
   
   if (GLOBAL_MODE === 'gameV') {
     console.log("game mode.");
-    if(gameOver){ 새게임시작(); } // newGame
+    // if(gameOver){ 새게임시작(); } // newGame
     
     캐릭터.velocity.y = FLAP;
     점수.현재++; //point++;

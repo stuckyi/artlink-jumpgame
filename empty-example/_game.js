@@ -5,6 +5,7 @@ var cnv;
 var mainCanvas, chooseCanvas, gameCanvas, resultCanvas;
 
 var startBtn, reStartBtn;
+var replayBtn;
 
 var GRAVITY = 0.3;
 var FLAP = -7;
@@ -181,7 +182,7 @@ function draw_파이프생성(){
   // pipes 생성하기
   if(frameCount%60 == 0) {
       
-    var 랜덤파이프높이 = random(50, 300); // pipeH
+    var 랜덤파이프높이 = random(10, 300); // pipeH
     var 파이프 = createSprite(캐릭터.position.x + width, 지형지물.땅.y-랜덤파이프높이 /2+1+100, 80, 랜덤파이프높이);
     파이프.addImage(파이프이미지);
     pipes.add(파이프);
@@ -202,7 +203,10 @@ function draw_점수표현(){
   push();
   color(0);
   textSize(14);
-  text("현재 점수: " + 점수.현재, camera.position.x+100, 40);
+  if (gameOver) { text("현재 점수: " + 점수.최근, camera.position.x + 100, 40); }
+  else { text("현재 점수: " + 점수.현재, camera.position.x+100, 40); }
+  
+  
   pop();
 }
 
@@ -217,6 +221,7 @@ function die() {
 
     
     효과.사운드.die.play();
+    다시하기버튼설정();
 }
 
 
@@ -232,6 +237,7 @@ function 새게임시작() {
 
   땅.position.x = 800/2;
   땅.position.y = (지형지물.땅.y + 100);
+  loop();
 }
 
 
@@ -251,6 +257,7 @@ function gameSetup() {
     지형지물설정();
     
     
+    
     // 그룹 생성
     pipes = new Group();
     friends = new Group();
@@ -262,4 +269,28 @@ function gameSetup() {
     // 카메라위치 초기화
     camera.position.y = height/2;
     // soundOption(); //사운드 켜기
+}
+
+function 다시하기버튼설정() {
+  var 다시하기버튼크기 = { w: 200, h: 100 };
+
+  replayBtn = createButton('다시하기');
+  
+  replayBtn.position((WINDOW_WIDTH/2-100), height/2);
+  replayBtn.addClass('replayBtn');
+  replayBtn.addClass('button');
+
+  replayBtn.style('width', 다시하기버튼크기.w+'px');
+  replayBtn.style('height', 다시하기버튼크기.h+'px');
+
+  // reStartBtn.hide();
+  replayBtn.mousePressed(다시하기버튼클릭);
+
+  fill(255,0,0);
+  ellipse(WINDOW_WIDTH / 2, height / 2, 100, 10);
+}
+
+function 다시하기버튼클릭() {
+  새게임시작();
+  replayBtn.remove();
 }
