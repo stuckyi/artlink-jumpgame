@@ -42,7 +42,7 @@ var 물리학 = {
 
 var 지형지물 = {
   땅: {  imgUrl: 'assets/source/p5play/flappy_ground.png', x: 0, y: 450 },
-  파이프: {  imgUrl: 'assets/source/p5play/flappy_pipe.png', 너비: 100, 높이: 100 },
+  파이프: {  imgUrl: 'assets/source/p5play/flappy_pipe.png', 너비: 100, 높이: 100 }, // 80X392
   배경: {  imgUrl: 'assets/source/p5play/flappy_bg.png', 너비: 100, 높이: 100 },
   최소열기: 300
 };
@@ -99,8 +99,7 @@ function preload() {
     // 아이언맨이미지 = loadImage(친구들.아이언맨이미지.imgUrl);
 }
 
-function MODE_GAME (){
-
+function MODE_GAME() {
   if(gameOver && keyWentDown('x')) { 새게임시작(); }
 
   if(!gameOver) {
@@ -132,18 +131,14 @@ function MODE_GAME (){
     // 캐릭터위치 변경에 따른 카메라 시점 변경
     camera.position.x = 캐릭터.position.x + width/4;
 
-    // wrap ground
-    if(camera.position.x > (땅.position.x - 땅.width+width/2)) {
-      땅.position.x += 땅.width;
-    }
-    background(247, 134, 131);
+    background(230, 204, 255); // 연보라
     camera.off();
 
-    image(배경이미지, 0, 지형지물.땅.y-190);
+    // image(배경이미지, 0, 지형지물.땅.y-190);
     camera.on();
 
     drawSprites(pipes);
-    drawSprite(땅); // ground
+    // drawSprite(땅); // ground
     drawSprite(캐릭터); // bird
 
     draw_점수표현();
@@ -152,9 +147,12 @@ function MODE_GAME (){
 
 
 
-function 캐릭터초기설정 (){
+function 캐릭터초기설정() {
+  
   // 캐릭터 초기 설정
-  캐릭터이미지 = loadImage('assets/source/characters/murphy.png');
+  var 선택된캐릭터 = 'assets/source/characters/' + selectedCharacter + '.png';
+
+  캐릭터이미지 = loadImage(선택된캐릭터);
   캐릭터 = createSprite(width/2, height/2, 40, 40);
   캐릭터.rotateToDirection = true;
   캐릭터.velocity.x = 4;
@@ -164,11 +162,13 @@ function 캐릭터초기설정 (){
 
 function 지형지물설정(){
   // 지형지물 설정
-  땅 = createSprite(800/2, 지형지물.땅.y + 100); //image 800x200
-  땅.addImage(땅이미지);
+  // 땅 = createSprite(800 / 2, 지형지물.땅.y + 100); //image 800x200
+  // 땅 = createSprite(width, 지형지물.땅.y + 100); //image 800x200 // ----------------------- 전체화면모드 EDIT
+  // 땅.addImage(땅이미지);
 }
 
-function draw_지나친파이프제거(){
+function draw_지나친파이프제거() {
+  console.log(pipes.length);
     // 지나친 파이프 제거하기
     for(var i = 0; i<pipes.length; i++){
       if(pipes[i].position.x < 캐릭터.position.x-width/2)
@@ -177,23 +177,33 @@ function draw_지나친파이프제거(){
 }
 
 
-function draw_파이프생성(){
+function draw_파이프생성() {
+  // var 파이프크기 = { w: 80, h: random(10, 300) };
+  var 파이프크기 = { w: 80, h: 392 };
+  var 파이프범위offset = 100;
+    
 
   // pipes 생성하기
-  if(frameCount%60 == 0) {
-      
-    var 랜덤파이프높이 = random(10, 300); // pipeH
-    var 파이프 = createSprite(캐릭터.position.x + width, 지형지물.땅.y-랜덤파이프높이 /2+1+100, 80, 랜덤파이프높이);
-    파이프.addImage(파이프이미지);
-    pipes.add(파이프);
+  if (frameCount % 60 == 0) {
+
+    var 하단파이프범위 = { yMin: height - (파이프크기.h / 2), yMax: height + (파이프크기.h / 2) };
+    var 하단파이프랜덤Y = random(하단파이프범위.yMin, 하단파이프범위.yMax);
+    var 하단파이프위치 = { x: (캐릭터.position.x + width), y: 하단파이프랜덤Y };
+    var 하단파이프 = createSprite(하단파이프위치.x, 하단파이프위치.y, 파이프크기.w, 파이프크기.h); // 전체화면 모드 edit
+
+    하단파이프.addImage(파이프이미지);
+    pipes.add(하단파이프);
 
     // 상단 파이프
-    if(랜덤파이프높이<200) {
-      랜덤파이프높이 = height - (height-지형지물.땅.y)-(랜덤파이프높이+MIN_OPENING);
-      파이프 = createSprite(캐릭터.position.x + width, 랜덤파이프높이/2-100, 80, 랜덤파이프높이);
-      파이프.mirrorY(-1);
-      파이프.addImage(파이프이미지);
-      pipes.add(파이프);
+    // 상단 파이프는 하단 파이프가 일정 수준이상 높지 않을 경우에만 생성한다.
+    if (하단파이프랜덤Y > height-(파이프크기.h/4)) {
+      var 상단파이프범위 = { yMin: -(파이프크기.h / 2), yMax: (파이프크기.h / 2) };
+      var 상단파이프위치 = { x: (캐릭터.position.x + width), y: random(상단파이프범위.yMin, 상단파이프범위.yMax) };
+      var 상단파이프 = createSprite(상단파이프위치.x, 상단파이프위치.y, 파이프크기.w, 파이프크기.h); // 전체화면 모드 edit
+      
+      상단파이프.mirrorY(-1);
+      상단파이프.addImage(파이프이미지);
+      pipes.add(상단파이프);
     }
   }
 
@@ -235,8 +245,9 @@ function 새게임시작() {
   캐릭터.position.y = height/2;
   캐릭터.velocity.y = 0;
 
-  땅.position.x = 800/2;
-  땅.position.y = (지형지물.땅.y + 100);
+  // 땅.position.x = 800 / 2;                   // ----------------------- 전체화면모드 EDIT
+  // 땅.position.x = width;                   // ----------------------- 전체화면모드 EDIT
+  // 땅.position.y = (지형지물.땅.y + 100);
   loop();
 }
 
@@ -250,7 +261,7 @@ function addPoint(){
 
 
 function gameSetup() {
-    gameCanvas = createCanvas(400, 600);
+    gameCanvas = createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT);
     gameCanvas.parent("gameV");
     점수.현재 = 0; // point = 0;
     캐릭터초기설정();

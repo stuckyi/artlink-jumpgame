@@ -1,4 +1,4 @@
-var selectedCharacter;
+var selectedCharacter = 'murphy'; // default
 
 
 var chooseBtn1,
@@ -133,7 +133,7 @@ function gameStart() {
         chooseV.hide();
         gameV.show();
         GLOBAL_MODE = 'gameV';
-        
+        캐릭터초기설정();
     }, 1000);
     
     setTimeout(function () {    

@@ -12,10 +12,7 @@ var mainV, chooseV, gameV, resultV;
 var isSelected = false;
 
 
-var 캐릭터크기 = {
-  choose: 300,
-  game: 100
-};
+var 캐릭터크기 = { choose: 300, game: 40 };
 var ON_SELECTED = false;
 var 캐릭터위치 = { x: -350, y: 100, endX: (WINDOW_WIDTH+캐릭터크기.choose), endY: 100 };
 
@@ -51,11 +48,13 @@ function setup() {
   chooseCanvas = createCanvas(400, 600);
   chooseCanvas.parent("chooseV");
 
-  gameCanvas = createCanvas(400, 600);
-  gameCanvas.parent("gameV");
-
   resultCanvas = createCanvas(400, 600);
   resultCanvas.parent("resultV");
+  
+  gameCanvas = createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT);
+  gameCanvas.parent("gameV");
+
+  
 
 
   // 게임 실행을 위한 전역 변수 및 관련 함수 실행
@@ -71,9 +70,7 @@ function draw() {
     MODE_GAME();
   } else if (GLOBAL_MODE === 'chooseV' && ON_SELECTED === true) {
     MODE_CHOOSE();
-  }
-
-  
+  }  
   
 } // drwar end
 
