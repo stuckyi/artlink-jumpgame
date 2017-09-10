@@ -30,24 +30,25 @@ var charInfo = [
 function chooseViewInit() {
   console.log("chooseViewInit");
   //선택 버튼 생성
-  chooseBtn1 = createButton('슈파플렉스 머피');
-  chooseBtn1.position(500, 100);
+  chooseBtn1 = createButton('슈파플렉스 \n 머피');
+  chooseBtn1.position(450, 100);
   chooseBtn1.addClass('chooseBtn');
 
+
   chooseBtn2 = createButton('키티와 튤립 키티');
-  chooseBtn2.position(500, 200);
+  chooseBtn2.position(450, 200);
   chooseBtn2.addClass('chooseBtn');
     
   chooseBtn3 = createButton('키티와 튤립 튤립');
-  chooseBtn3.position(500, 300);
+  chooseBtn3.position(450, 300);
   chooseBtn3.addClass('chooseBtn');
     
   chooseBtn4 = createButton('키티와 튤립 바이올렛');
-  chooseBtn4.position(500, 400);
+  chooseBtn4.position(450, 400);
   chooseBtn4.addClass('chooseBtn');
 
   chooseBtn5 = createButton('슈가맨 버블소녀 버블소녀');
-  chooseBtn5.position(500, 500);
+  chooseBtn5.position(450, 500);
   chooseBtn5.addClass('chooseBtn');
 
   // 버튼 공통 스타일, 함수 초기설정
@@ -55,8 +56,13 @@ function chooseViewInit() {
   for (var btni = 0; btni < buttons.length; btni++){
     buttons[btni].addClass('button');
 
-    buttons[btni].style('width', '300px');
+    buttons[btni].style('width', '400px');
     buttons[btni].style('height', '100px');
+    buttons[btni].style('color', 'white');
+    buttons[btni].style('font-size', '2rem');
+    buttons[btni].style('text-shadow', ' 1px 1px 0 #000,-1px -1px 0 #000,  1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000');
+    buttons[btni].style('text-stroke-width', '5px');
+    
 
     buttons[btni].mousePressed(charInfo[btni].fnName); 
   }
@@ -82,12 +88,12 @@ function chooseViewInit() {
   questionBtn5.position(500, 500);
   questionBtn5.addClass('questionBtn'); 
 
-   // 버튼 공통 스타일, 함수 초기설정
+   // 선택하시겠습니까? 버튼 공통 스타일, 함수 초기설정
   var buttons = selectAll('.questionBtn');
   for (var btni = 0; btni < buttons.length; btni++){
     buttons[btni].addClass('button');
 
-    buttons[btni].style('width', '300px');
+    buttons[btni].style('width', '450px');
     buttons[btni].style('height', '100px');
 
     buttons[btni].mousePressed(gameStart); 

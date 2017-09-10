@@ -29,6 +29,7 @@
 #chooseV {
     .button {
         @include size(400px, 100px);
+        font-size: 3rem;
     }
     .selectedImg {
         position: relative;

@@ -19,6 +19,12 @@ var gameOver;
 var birdImg, pipeImg, groundImg, bgImg;
 var point;
 
+
+// font
+var spoca = {};
+
+
+
 var 점수 = {
     현재: 0,
     최고: 0,
@@ -72,6 +78,15 @@ var 쵸파이미지, 치코리타이미지, 고양이여자아이이미지, 내�
    
 function preload() {
     setView();
+
+  
+    // Font file
+    console.log("폰트 파일 로딩");
+    spoca.thin = loadFont('assets/font/spocahansans_subset/SpoqaHanSans-Thin.otf');
+    spoca.light = loadFont('assets/font/spocahansans_subset/SpoqaHanSans-Light.otf');
+    spoca.bold = loadFont('assets/font/spocahansans_subset/SpoqaHanSans-Bold.otf');
+    
+    
     // 사운드 파일
     console.log("사운드 파일 로딩");
     효과.사운드.점프 = loadSound('assets/sound/jump.ogg');
@@ -212,9 +227,14 @@ function draw_점수표현(){
   // 점수 표현 영역
   push();
   color(0);
-  textSize(14);
-  if (gameOver) { text("현재 점수: " + 점수.최근, camera.position.x + 100, 40); }
-  else { text("현재 점수: " + 점수.현재, camera.position.x+100, 40); }
+  textFont(spoca.thin);
+  textSize(32);
+
+  var 점수위치 = { x: camera.position.x + width / 4, y: 40 };
+
+
+  if (gameOver) { text("SCORE " + 점수.최근, 점수위치.x, 점수위치.y); }
+  else { text("SCORE " + 점수.현재, 점수위치.x, 점수위치.y); }
   
   
   pop();

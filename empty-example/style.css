@@ -5720,7 +5720,8 @@ label.panel-block {
 
 #chooseV .button {
   width: 400px;
-  height: 100px; }
+  height: 100px;
+  font-size: 3rem; }
 #chooseV .selectedImg {
   position: relative;
   animation-name: move_murhpy;
