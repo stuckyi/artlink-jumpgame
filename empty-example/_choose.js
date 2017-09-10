@@ -56,7 +56,7 @@ function chooseViewInit() {
   for (var btni = 0; btni < buttons.length; btni++){
     buttons[btni].addClass('button');
 
-    buttons[btni].style('width', '400px');
+    buttons[btni].style('width', '450px');
     buttons[btni].style('height', '100px');
     buttons[btni].style('color', 'white');
     buttons[btni].style('font-size', '2rem');
@@ -69,23 +69,23 @@ function chooseViewInit() {
 
   
   questionBtn1 = createButton('선택하시겠습니까?');
-  questionBtn1.position(500, 100);
+  questionBtn1.position(450, 100);
   questionBtn1.addClass('questionBtn');
   
   questionBtn2 = createButton('선택하시겠습니까?');    
-  questionBtn2.position(500, 200);
+  questionBtn2.position(450, 200);
   questionBtn2.addClass('questionBtn');
 
   questionBtn3 = createButton('선택하시겠습니까?');    
-  questionBtn3.position(500, 300); 
+  questionBtn3.position(450, 300); 
   questionBtn3.addClass('questionBtn');  
 
   questionBtn4 = createButton('선택하시겠습니까?');    
-  questionBtn4.position(500, 400);  
+  questionBtn4.position(450, 400);  
   questionBtn4.addClass('questionBtn');  
 
   questionBtn5 = createButton('선택하시겠습니까?');    
-  questionBtn5.position(500, 500);
+  questionBtn5.position(450, 500);
   questionBtn5.addClass('questionBtn'); 
 
    // 선택하시겠습니까? 버튼 공통 스타일, 함수 초기설정
@@ -95,6 +95,10 @@ function chooseViewInit() {
 
     buttons[btni].style('width', '450px');
     buttons[btni].style('height', '100px');
+    buttons[btni].style('color', 'white');
+    buttons[btni].style('font-size', '2rem');
+    buttons[btni].style('text-shadow', ' 1px 1px 0 #000,-1px -1px 0 #000,  1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000');
+    buttons[btni].style('text-stroke-width', '5px');
 
     buttons[btni].mousePressed(gameStart); 
   }  

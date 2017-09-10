@@ -12,6 +12,8 @@ var FLAP = -7;
 var GROUND_Y = 450;
 var MIN_OPENING = 300;
 
+var VELOCITY_X = 10;
+
 var bird, ground;
 var pipes;
 var friends;
@@ -170,7 +172,7 @@ function 캐릭터초기설정() {
   캐릭터이미지 = loadImage(선택된캐릭터);
   캐릭터 = createSprite(width/2, height/2, 40, 40);
   캐릭터.rotateToDirection = true;
-  캐릭터.velocity.x = 4;
+  캐릭터.velocity.x = VELOCITY_X;
   캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)
   캐릭터.addImage(캐릭터이미지);
 }
