@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+ 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> 장애물 점프 - 여행의 시작 </title>
+    <meta name="description" content="멘넴X스투키스튜디오 의 장애물 점프 게임">
+    
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+    body { padding: 0; margin: 0;}
+    canvas {
+      width: 100%;
+      height: auto;
+    }
+    </style>
+  </head>
+  <body>
+
+    <div id="canvas-container">
+
+      <div id="main" class="section-container">
+        <section class="hero is-primary is-fullheight">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+                <img class="img-main" src="#" alt="메인 타이틀 이미지"/>
+              </h1>
+              <h2 class="subtitle">
+                <p class="clickMsg">Click To Play</p>
+              </h2>
+            </div>
+          </div>
+        </section>
+        
+        
+      </div>
+
+      <div id="select" class="section-container">
+        <section class="hero is-primary is-fullheight">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+                Select
+              </h1>
+              <h2 class="subtitle">
+                캐릭터를 골라주세요
+              </h2>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+
+      <div id="loading" class="section-container">
+        <section class="hero is-primary is-fullheight">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+                LOADING...
+              </h1>
+              <h2 class="subtitle">
+                이 게임에 대한 튜토리얼 페이지
+              </h2>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="game" class="section-container">
+        <div id="topBar" class="topBar"> 
+          <img class="meet" src="assets/images/ui/meet.png" alt="만난친구들" />
+          <img class="meet-friend" src="assets/images/ui/friends/gervera_after.png" alt="거베라" />
+          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
+          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
+          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
+          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
+
+
+          <img class="option-sound" src="assets/images/ui/friends/gervera_before.png" alt="사운드 끄기" />
+          <img class="option-sound" src="assets/images/ui/friends/gervera_before.png" alt="사운드 끄기" />
+
+
+
+        </div>
+        <button id="replayBtn" class="button replayBtn">다시하기</button>
+
+      </div>
+
+      <div id="result" class="section-container">
+        <section class="hero is-success is-fullheight">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+                Result or Finish
+              </h1>
+              <h2 class="subtitle">
+                결과 혹은 종료
+              </h2>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div> <!-- #canvas-container end -->
+
+
+    <!-- lib -->
+    <script src="./lib/p5.min.js"></script>
+    <script src="./lib/p5.dom.min.js"></script>
+    <script src="./lib/p5.sound.js"></script>
+    <script src="./lib/p5.play.js"></script>
+    <script src="./lib/p5.collide2d.js"></script>
+    
+    <script src="./lib/jquery.min.js"></script>
+
+    <!-- source -->
+    <script src="./source/preset.js"></script>
+
+    <script src="./source/main.js"></script>
+    <script src="./source/select.js"></script>
+    <script src="./source/game.js"></script>
+    <script src="./source/result.js"></script>
+
+    <script src="source/sketch.js"></script>
+
+
+  </body>
+</html>

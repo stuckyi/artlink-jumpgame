@@ -1,0 +1,45 @@
+/* color */
+$main-color: #ffff8c;
+$main-color-light: lighten($main-color, 20%);
+$main-color-dark: darken($main-color, 20%);
+
+$font-color-1: #333;
+$text-color: #333;
+$text-item: #1d1d1d;
+
+    // 상세페이지 hover border color
+    $hover-active: #262626;
+    $hover-inactive: #f4f4f4;
+
+
+    // tooltip
+    $tooltip-bg: #333;
+    $tooltip-text: #fff;
+
+    // ruler
+    $rulerCol: #333;
+
+    //modal
+    $selectedInfo: #000;
+    $active-stem: #ffff8c;
+    $inactive-opacity: 0.4;
+
+$index-color: #8dff4d;
+
+// icon
+$icon-opacity-before: 0.25;
+
+
+
+
+
+
+
+//img size
+$imgWidth: 200px;
+$imgHeight: 320px;
+
+
+
+// GRID
+$base: 900px;

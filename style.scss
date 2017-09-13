@@ -1,0 +1,93 @@
+@charset 'utf-8';
+@import 'assets/scss/_global';
+
+
+$z-index-topbar: 100;
+$z-index-replayBtn: 200;
+
+$topBar: 60px;
+
+#canvas-container {
+    
+    div {
+        border: 1px solid #333;
+    }
+
+    .section-container {
+        display: none;
+        &:nth-of-type(1){
+            display: block;
+        }
+    }
+}
+
+#main {
+
+    .img-main {
+        @include size(100%, auto);
+        margin: 0 auto;
+        border: 2px solid lightsalmon;
+    }
+
+    .clickMsg {
+        text-align: center;
+        color: red;
+    }
+}
+
+
+#select {
+    display: none;
+    @include size(100%, auto);
+}
+
+#loading {
+    display: none;
+    @include size(100%, auto);
+}
+#game {
+    @include size(100%, auto);
+    display: none;
+    .topBar {
+        @include size(100%, 60px);
+        // display: none;
+        z-index: $z-index-topbar;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background-image: url(assets/images/ui/topbar.png);
+        background-repeat: no-repeat;
+        background-size: 110% 60px;
+        
+        .meet { 
+            @include size(auto, 40px);
+        }
+        .meet-friends {
+            @include size(auto, 40px);
+        }
+
+        .option-sound {
+            right: 0;
+        }
+    }
+    .replayBtn {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 200;
+    }
+    
+}
+
+
+#result {
+    @include size(100%, auto);
+    display: none;
+}
+
+
+// helper class
+.is-hidden { display: none; }
+.is-show { display: block; }

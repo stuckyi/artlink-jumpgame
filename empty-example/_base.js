@@ -92,7 +92,7 @@ function mousePressed() {
     console.log("game mode.");
     // if(gameOver){ 새게임시작(); } // newGame
     
-    캐릭터.velocity.y = FLAP;
+    캐릭터.velocity.y = 물리학.점프;
     점수.현재++; //point++;
     
     console.log("당신의 점수는 : " + point);

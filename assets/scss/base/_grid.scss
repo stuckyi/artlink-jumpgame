@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+// z-index
+$z-index-search: 400;
+
+$z-index-nav: 200;
+$z-index-nav-btn: 900;
+
+$z-index-main: 100;
+$z-index-tooltip: 1000;
+$z-index-modal: 1100;
+
+
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+
+
+.nav {
+        z-index: $z-index-nav;
+        .logo { @include size(50px, 50px); }
+}
+
+.main { 
+        z-index: $z-index-main;
+        padding: 4rem auto;
+        overflow: hidden;
+ }
+
+

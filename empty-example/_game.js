@@ -15,9 +15,9 @@ var MIN_OPENING = 300;
 var VELOCITY_X = 10;
 
 var bird, ground;
-var pipes;
-var friends;
-var gameOver;
+var pipes;    // pipes
+var friends;  // 친구들
+var gameOver; // gameOver
 var birdImg, pipeImg, groundImg, bgImg;
 var point;
 

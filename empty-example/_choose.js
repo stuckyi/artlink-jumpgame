@@ -29,26 +29,28 @@ var charInfo = [
 
 function chooseViewInit() {
   console.log("chooseViewInit");
+  var btnSize = { w: 450, h: 100 };
+  var btnX = ((WINDOW_WIDTH / 2) - (btnSize.w/2));
   //선택 버튼 생성
   chooseBtn1 = createButton('슈파플렉스 \n 머피');
-  chooseBtn1.position(450, 100);
+  chooseBtn1.position(btnX, 100);
   chooseBtn1.addClass('chooseBtn');
 
 
   chooseBtn2 = createButton('키티와 튤립 키티');
-  chooseBtn2.position(450, 200);
+  chooseBtn2.position(btnX, 200);
   chooseBtn2.addClass('chooseBtn');
     
   chooseBtn3 = createButton('키티와 튤립 튤립');
-  chooseBtn3.position(450, 300);
+  chooseBtn3.position(btnX, 300);
   chooseBtn3.addClass('chooseBtn');
     
   chooseBtn4 = createButton('키티와 튤립 바이올렛');
-  chooseBtn4.position(450, 400);
+  chooseBtn4.position(btnX, 400);
   chooseBtn4.addClass('chooseBtn');
 
   chooseBtn5 = createButton('슈가맨 버블소녀 버블소녀');
-  chooseBtn5.position(450, 500);
+  chooseBtn5.position(btnX, 500);
   chooseBtn5.addClass('chooseBtn');
 
   // 버튼 공통 스타일, 함수 초기설정
@@ -56,8 +58,8 @@ function chooseViewInit() {
   for (var btni = 0; btni < buttons.length; btni++){
     buttons[btni].addClass('button');
 
-    buttons[btni].style('width', '450px');
-    buttons[btni].style('height', '100px');
+    buttons[btni].style('width', btnSize.w + 'px');
+    buttons[btni].style('height', btnSize.h + 'px');
     buttons[btni].style('color', 'white');
     buttons[btni].style('font-size', '2rem');
     buttons[btni].style('text-shadow', ' 1px 1px 0 #000,-1px -1px 0 #000,  1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000');
@@ -69,23 +71,23 @@ function chooseViewInit() {
 
   
   questionBtn1 = createButton('선택하시겠습니까?');
-  questionBtn1.position(450, 100);
+  questionBtn1.position(btnX, 100);
   questionBtn1.addClass('questionBtn');
   
   questionBtn2 = createButton('선택하시겠습니까?');    
-  questionBtn2.position(450, 200);
+  questionBtn2.position(btnX, 200);
   questionBtn2.addClass('questionBtn');
 
   questionBtn3 = createButton('선택하시겠습니까?');    
-  questionBtn3.position(450, 300); 
+  questionBtn3.position(btnX, 300); 
   questionBtn3.addClass('questionBtn');  
 
   questionBtn4 = createButton('선택하시겠습니까?');    
-  questionBtn4.position(450, 400);  
+  questionBtn4.position(btnX, 400);  
   questionBtn4.addClass('questionBtn');  
 
   questionBtn5 = createButton('선택하시겠습니까?');    
-  questionBtn5.position(450, 500);
+  questionBtn5.position(btnX, 500);
   questionBtn5.addClass('questionBtn'); 
 
    // 선택하시겠습니까? 버튼 공통 스타일, 함수 초기설정
@@ -93,8 +95,8 @@ function chooseViewInit() {
   for (var btni = 0; btni < buttons.length; btni++){
     buttons[btni].addClass('button');
 
-    buttons[btni].style('width', '450px');
-    buttons[btni].style('height', '100px');
+    buttons[btni].style('width', btnSize.w + 'px');
+    buttons[btni].style('height', btnSize.h + 'px');
     buttons[btni].style('color', 'white');
     buttons[btni].style('font-size', '2rem');
     buttons[btni].style('text-shadow', ' 1px 1px 0 #000,-1px -1px 0 #000,  1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000');
@@ -231,7 +233,7 @@ function MODE_CHOOSE() {
   if (!isSelected) {
     if (캐릭터위치.x < WINDOW_WIDTH / 5) { 캐릭터위치.x += 6; }  
   } else {
-    캐릭터위치.x += 30;
+    캐릭터위치.x += 60;
   }
   
   if (selectedCharacter === 'murphy') {
