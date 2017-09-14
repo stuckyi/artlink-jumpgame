@@ -3,6 +3,7 @@ var replayBtn; // 다시 시작하기 버튼
 // 게임 옵션
 var gameOver;
 var selectedCharacter = 'kitty'; //default character.
+var friendIndex = 0; // 친구들 인덱스
 
 
 
@@ -38,14 +39,27 @@ function draw_친구이미지생성() {
 }
 
 
+
+
+// 친구를 만났을 때 캐릭터가 보여줄 효과
 function draw_친구만남효과(currentX) {
-    // 친구를 만났을 때 캐릭터가 보여줄 효과
+    
     if (currentX % 2000 === 0) {
         console.log("캐릭터를 만난 지점!");
+        setMeetState(friendIndex);
+        friendIndex++; // 친구인덱스 증가
+    }
+
+    // 상단바의 만날친구들 아이콘 상태 변경
+    function setMeetState(findex) {
+        // 선택 -> 변경
+        var topMeetIcons = $('.meet-friend').eq(findex); // 현재 만난 친구인덱스
+        var currentSrc = topMeetIcons.attr('src');
+        var setSrc = currentSrc.split('_')[0] + '_after.png'; // 만난 후 보여져야할 이미지 src.
+        topMeetIcons.attr('src', setSrc); // 현재 이미지 src를 선택하여 변경.
     }
 
 }
-
 
 
 
@@ -242,6 +256,11 @@ function gameClickEffect() {
 }
 
 
+
+
+
+
+
 function 다시하기버튼설정() {
     replayBtn = select('#replayBtn');
     replayBtn.mousePressed(다시하기버튼클릭);
@@ -250,11 +269,22 @@ function 다시하기버튼설정() {
 }
 
 
-
-
-
 function 다시하기버튼클릭() {
-    console.log("다시하기 버튼이 클릭되었어요!");
   새게임시작();
   replayBtn.hide();
+  만난친구들상태리셋();  
 }
+
+
+// 다시하기 클릭시 모든 '만날친구들' 리셋
+function 만난친구들상태리셋() {
+    friendIndex = 0; // 친구인덱스 리셋
+
+    $('.meet-friend').each(function () {
+        var icon = $(this);
+        var currentSrc = icon.attr('src');
+        var resetSrc = currentSrc.split('_')[0] + '_before.png'; // 만난 후 보여져야할 이미지 src.
+        icon.attr('src', resetSrc); // 현재 이미지 src를 선택하여 변경. 
+    });
+}
+
