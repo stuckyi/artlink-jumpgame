@@ -26,9 +26,9 @@
         <section class="hero is-primary is-fullheight">
           <div class="hero-body">
             <div class="container">
-              <h1 class="title">
+              <p class="image">
                 <img class="img-main" src="#" alt="메인 타이틀 이미지"/>
-              </h1>
+              </p>
               <h2 class="subtitle">
                 <p class="clickMsg">Click To Play</p>
               </h2>
@@ -40,54 +40,113 @@
       </div>
 
       <div id="select" class="section-container">
-        <section class="hero is-primary is-fullheight">
+
+        
+
+
+        <section id="hole" class="hero is-fullheight">
+          <div class="hero-head columns is-centered">
+            <img  src="assets/images/ui/select-title-text.png" alt="여행을 함께할 캐릭터를 골라주세요 텍스트" />  
+          </div>
           <div class="hero-body">
             <div class="container">
-              <h1 class="title">
-                Select
-              </h1>
-              <h2 class="subtitle">
-                캐릭터를 골라주세요
-              </h2>
+              <div class="columns is-centered">
+                <!-- murphy -->
+                <div onClick="selectHero('murphy')" 
+                     id="select-murphy"
+                     class="column is-2 select-frame">
+
+                  <img id="img-murphy" class="column img_character rotate15" src="assets/images/ui/select/character_murphy.png" alt="murphy textinfo image" />
+                  <img class="column img_textinfo"  src="assets/images/ui/select/character_murphy_info.png" alt="murphy textinfo image" />
+                </div>
+
+                <div onClick="selectHero('kitty')" 
+                  id="select-kitty"
+                  class="column is-2 select-frame">
+                  
+                  <img id="img-kitty" class="column img_character rotate15" src="assets/images/ui/select/character_kitty.png" alt="kitty textinfo image" />
+                  <img class="column img_textinfo"  src="assets/images/ui/select/character_kitty_info.png" alt="kitty textinfo image" />
+                </div>
+
+                <div onClick="selectHero('tulip')" 
+                  id="select-tulip"
+                  class="column is-2 select-frame">
+                  
+                  <img 
+                    id="img-tulip" class="column img_character rotate15" src="assets/images/ui/select/character_tulip.png" alt="tulip textinfo image" />
+                  <img class="column img_textinfo"  src="assets/images/ui/select/character_tulip_info.png" alt="tulip textinfo image" />
+                </div>
+
+                <div onClick="selectHero('violet')" 
+                  id="select-violet"
+                  class="column is-2 select-frame">
+
+                  <img id="img-violet" class="column img_character rotate15" src="assets/images/ui/select/character_violet.png" alt="violet textinfo image" />
+                  <img class="column img_textinfo"  src="assets/images/ui/select/character_violet_info.png" alt="violet textinfo image" />
+                </div>
+
+                <div onClick="selectHero('bubblegirl')" 
+                  id="select-bubblegirl"
+                  class="column is-2 select-frame">
+
+                  <img id="img-bubblegirl" class="column img_character rotate15" src="assets/images/ui/select/character_bubblegirl.png" alt="bubblegirl textinfo image" />
+                  <img class="column img_textinfo"  src="assets/images/ui/select/character_bubblegirl_info.png" alt="bubblegirl textinfo image" /> </div>
+              </div>
             </div>
           </div>
         </section>
+        <div class="modal-background select-modal"></div>
+
       </div>
 
 
 
       <div id="loading" class="section-container">
-        <section class="hero is-primary is-fullheight">
+        <section class="hero is-fullheight">
           <div class="hero-body">
-            <div class="container">
-              <h1 class="title">
-                LOADING...
-              </h1>
-              <h2 class="subtitle">
-                이 게임에 대한 튜토리얼 페이지
-              </h2>
-            </div>
+            <img class="loadingImg" src="assets/images/graphic/loadingImg.png" align="middle" alt="로딩중입니다" />
+            
           </div>
         </section>
       </div>
 
       <div id="game" class="section-container">
-        <div id="topBar" class="topBar"> 
-          <img class="meet" src="assets/images/ui/meet.png" alt="만난친구들" />
-          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라0" />
-          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라1" />
-          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라2" />
-          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
-          <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
-
-
-          <img class="option-sound" src="assets/images/ui/friends/gervera_before.png" alt="사운드 끄기" />
-          <img class="option-sound" src="assets/images/ui/friends/gervera_before.png" alt="사운드 끄기" />
-
-
-
+        <div id="topBar" class="topBar columns is-marginless is-paddingless"> 
+          <div class="column is-2 is-paddingless">
+            <img class="meet" src="assets/images/ui/meet.png" alt="만난친구들" />
+          </div>
+          <div class="column is-8 is-paddingless">
+            <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라0" />
+            <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라1" />
+            <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라2" />
+            <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
+            <img class="meet-friend" src="assets/images/ui/friends/gervera_before.png" alt="거베라" />
+          </div>
+          <div class="column is-2 is-paddingless">
+            <button id="soundOnBtn" class="soundBtn" > </button>
+            <button id="soundOffBtn" class="soundBtn" > </button>
+            <!--<img onClick="setSound('on')" class="option-sound" src="assets/images/ui/sound-on.png" alt="사운드 끄기" />-->
+            <!--<img class="option-sound" src="assets/images/ui/sound-off.png" alt="사운드 끄기" />-->
+          </div>
         </div>
-        <button id="replayBtn" class="button replayBtn">다시하기</button>
+
+        <!--<div class="gameover-bg">&nbsp; </div>-->
+        <!-- bulma s -->
+        <div class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+           
+            <p class="image">
+              <img class="gameover-img" src="assets/images/ui/gameover.png" alt="gameover">
+            </p>
+            <p class="imgae">
+              <button id="replayBtn" class="replayBtn"> </button>
+            </p>
+          </div>
+          
+        </div>
+        <!-- bulma e -->
+        
 
       </div>
 

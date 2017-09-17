@@ -1,11 +1,14 @@
 // preset.js 에서는 setup 전 해두어야할 작업들을 처리한다.
 
-var browserSize = { w: window.outerWidth, h: window.outerHeight }; // 브라우저 크기
+var browserSize = { w: window.innerWidth, h: window.innerHeight }; // 브라우저 
+var topBarHeight = 60; // 상단 바 높이
+
+var isSound = true;
 var VIEWS = {};
 var CANVAS = {}; // game.
 
 var GLOBAL_MODE = 'MAIN'; // MAIN, SELECT, GAME, RESULT.
-var SELECT_COMPLETE = true;
+var SELECT_COMPLETE = false; // 선택페이지에서 선택을 완료했는지.
 var GAME_COMPLETE = false;
 
 
@@ -36,8 +39,13 @@ var 물리학 = { 중력: 0.3, 점프: -7 };
 var 캐릭터;
 var 캐릭터정보 = {};
 
-var 캐릭터이미지, 파이프이미지, 땅이미지, 배경이미지;
+var 캐릭터이미지, 파이프이미지, 땅이미지, 배경이미지, 피니시이미지;
 
+
+// 피니시정보
+
+var 피니시;
+var 피니시정보 = {};
 
 var 파이프그룹;
 
@@ -81,7 +89,8 @@ var 지형지물 = {
   땅: {  imgUrl: 'assets/source/p5play/flappy_ground.png', x: 0, y: 450 },
   // 파이프: { imgUrl: 'assets/source/p5play/flappy_pipe.png', 너비: 100, 높이: 100 }, // 80X392
   파이프: {  imgUrl: 'assets/images/graphic/flower.png', 너비: 100, 높이: 100 }, // 80X392
-  배경: {  imgUrl: 'assets/images/graphic/backgroundImage.png', 너비: 100, 높이: 100 }
+  배경: { imgUrl: 'assets/images/graphic/backgroundImage.png', 너비: 100, 높이: 100 },
+  피니시: { imgUrl: 'assets/images/graphic/finish.png', 너비: 100, 높이: 100 }
 };
 
 
@@ -100,15 +109,20 @@ function preload() {
     
     // 사운드 파일
     console.log("사운드 파일 로딩");
-    효과.사운드.점프 = loadSound('assets/sound/jump.ogg');
-    효과.사운드.die = loadSound('assets/sound/die.ogg');
-    효과.사운드.bgm = loadSound('assets/sound/bgm/mendonald.min.ogg');
+    효과.사운드.점프 = loadSound('assets/sound/jump_min.ogg');
+    효과.사운드.die = loadSound('assets/sound/gameover_min.ogg');
+    효과.사운드.bgm = loadSound('assets/sound/bgm/bgm.ogg');
 
     
     // 지형지물 이미지
     console.log("지형지물 이미지 로딩");
-    파이프이미지 = loadImage(지형지물.파이프.imgUrl); //pipeImg
+    파이프이미지 = loadImage(지형지물.파이프.imgUrl);
+  
+    //pipeImg
     배경이미지 = loadImage(지형지물.배경.imgUrl); // bgImg
+    // Finish Img
+    피니시이미지 = loadImage(지형지물.피니시.imgUrl); // bgImg
+    
     
     
     

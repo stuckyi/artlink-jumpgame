@@ -5703,8 +5703,6 @@ label.panel-block {
   padding: 4rem auto;
   overflow: hidden; }
 
-#canvas-container div {
-  border: 1px solid #333; }
 #canvas-container .section-container {
   display: none; }
   #canvas-container .section-container:nth-of-type(1) {
@@ -5714,20 +5712,45 @@ label.panel-block {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  border: 2px solid lightsalmon; }
+  border: 2px solid lightsalmon;
+  text-align: center; }
 #main .clickMsg {
+  animation: changeTextOpacity .5s ease-out alternate infinite;
   text-align: center;
   color: red; }
 
 #select {
   display: none;
   width: 100%;
-  height: auto; }
+  height: auto;
+  background-image: url(assets/images/ui/select-bg.png); }
+  #select .hero-head img {
+    margin-top: 3rem; }
+  #select .columns .select-frame {
+    min-height: 22.81rem;
+    text-align: center;
+    background-image: url(assets/images/ui/select-frame.png);
+    background-repeat: no-repeat;
+    background-size: auto 22.81rem;
+    transition: all .2s ease-in-out; }
+    #select .columns .select-frame .img_character {
+      margin: 2rem auto; }
+    #select .columns .select-frame .img_textinfo {
+      margin: 2rem auto; }
+  #select .select-modal {
+    display: none;
+    background-color: white;
+    opacity: .8;
+    transition: all 2s ease-in-out; }
 
 #loading {
   display: none;
   width: 100%;
   height: auto; }
+  #loading .loadingImg {
+    width: 50%;
+    height: auto;
+    margin: 0 auto; }
 
 #game {
   width: 100%;
@@ -5742,31 +5765,76 @@ label.panel-block {
     left: 0;
     background-image: url(assets/images/ui/topbar.png);
     background-repeat: no-repeat;
-    background-size: 110% 60px; }
+    background-size: 110% 60px;
+    border: none; }
     #game .topBar .meet {
       width: auto;
-      height: 40px; }
+      height: 2rem; }
     #game .topBar .meet-friends {
       width: auto;
-      height: 40px; }
-    #game .topBar .option-sound {
-      right: 0; }
+      height: 1.875rem; }
+    #game .topBar .soundBtn {
+      position: absolute;
+      width: 1.875rem;
+      height: 1.875rem;
+      border: none;
+      background-repeat: no-repeat;
+      background-size: auto 1.875rem;
+      text-decoration: none; }
+    #game .topBar #soundOnBtn {
+      background-image: url(assets/images/ui/sound-on.png); }
+    #game .topBar #soundOffBtn {
+      background-image: url(assets/images/ui/sound-off.png); }
+  #game .modal {
+    z-index: 200;
+    position: absolute; }
+    #game .modal .modal-content {
+      width: auto !important;
+      height: 70%;
+      border: none; }
+      #game .modal .modal-content .gameover-image {
+        width: 40%; }
+      #game .modal .modal-content .image {
+        overflow: visible; }
   #game .replayBtn {
     display: none;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 200; }
+    z-index: 300;
+    left: 40%;
+    margin-top: 3rem;
+    width: 150px;
+    height: 8.75rem;
+    background: none;
+    background-image: url("assets/images/ui/icon/replayImg.png");
+    background-repeat: no-repeat;
+    background-size: 150px 8.75rem;
+    border: none;
+    text-decoration: none;
+    opacity: 0.4; }
+    #game .replayBtn:hover {
+      opacity: 1; }
 
 #result {
   width: 100%;
   height: auto;
   display: none; }
 
-.is-hidden {
-  display: none; }
+.grow {
+  transition: all .2s ease-in-out;
+  transform: scale(1.1); }
+  .grow:hover {
+    transform: scale(1.1); }
 
-.is-show {
-  display: block; }
+.rotate15 {
+  transition: all .2s ease-in-out;
+  transition-delay: 0.3s; }
+  .rotate15:hover {
+    transform: rotateZ(-15deg); }
+
+@keyframes changeTextOpacity {
+  from {
+    opacity: 1; }
+  to {
+    opacity: .4; } }
 
 /*# sourceMappingURL=style.css.map */

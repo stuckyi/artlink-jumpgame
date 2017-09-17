@@ -1,17 +1,35 @@
 @charset 'utf-8';
 @import 'assets/scss/_global';
 
+// z-index
 
 $z-index-topbar: 100;
-$z-index-replayBtn: 200;
+$z-index-gameover-bg: 200;
+$z-index-replayBtn: 300;
+$z-index-soundBtn: 400;
+
+
+
 
 $topBar: 60px;
+$top-text-height: 2rem;
+$top-icon-height: 1.875rem; // 30px
+
+
+
+// $gameover-replayBtn: 12.5rem; // 200px
+$gameover-replayBtn: 8.75rem; // 120px
+
+
+
+
+// size ------
+$select-img-height: 3.813rem; // 61px
+$select-frame-size : 22.81rem;
+$select-frame-size-hover : 26rem;
 
 #canvas-container {
     
-    div {
-        border: 1px solid #333;
-    }
 
     .section-container {
         display: none;
@@ -27,9 +45,11 @@ $topBar: 60px;
         @include size(100%, auto);
         margin: 0 auto;
         border: 2px solid lightsalmon;
+        text-align: center;
     }
 
     .clickMsg {
+        animation: changeTextOpacity .5s ease-out alternate infinite;
         text-align: center;
         color: red;
     }
@@ -39,44 +59,128 @@ $topBar: 60px;
 #select {
     display: none;
     @include size(100%, auto);
+    background-image: url(assets/images/ui/select-bg.png);
+
+
+    .hero-head { 
+        img { margin-top: 3rem; }
+    }
+    .columns {
+        
+        .select-frame {
+            min-height: $select-frame-size; // 365 px
+            text-align: center;
+            background-image: url(assets/images/ui/select-frame.png);
+            background-repeat: no-repeat;
+            background-size: auto $select-frame-size;
+
+            .img_character { margin: 2rem auto; }
+            .img_textinfo { margin: 2rem auto; }
+
+            transition: all .2s ease-in-out; 
+        }
+        
+    }
+
+    .select-modal {
+        display: none;
+        background-color: white;
+        opacity: .8;
+        transition: all 2s ease-in-out; 
+    }
 }
 
 #loading {
     display: none;
     @include size(100%, auto);
+
+    .loadingImg{
+        @include size(50%, auto);
+        margin: 0 auto;
+    }
 }
+
+
+
 #game {
     @include size(100%, auto);
     display: none;
+
+    
     .topBar {
-        @include size(100%, 60px);
-        // display: none;
+        @include size(100%, $topBar);
+        
         z-index: $z-index-topbar;
         position: absolute;
         top: 0;
-        left: 0;
+        left: 0;        
 
         background-image: url(assets/images/ui/topbar.png);
         background-repeat: no-repeat;
-        background-size: 110% 60px;
+        background-size: 110% $topBar;
         
-        .meet { 
-            @include size(auto, 40px);
-        }
-        .meet-friends {
-            @include size(auto, 40px);
-        }
+        border: none;
+        .meet {  @include size(auto, $top-text-height); }
+        .meet-friends { @include size(auto, $top-icon-height); }
 
-        .option-sound {
-            right: 0;
+
+        .soundBtn {
+            position: absolute;
+            $z-index: $z-index-soundBtn;
+            @include size($top-icon-height, $top-icon-height);
+            border: none;
+            
+            background-repeat: no-repeat;
+            background-size: auto $top-icon-height;
+            text-decoration: none;
+        }
+        #soundOnBtn { 
+            
+            background-image: url(assets/images/ui/sound-on.png);   }
+        #soundOffBtn { 
+            
+            background-image: url(assets/images/ui/sound-off.png); }
+    }
+
+    
+    
+
+    .modal {
+        z-index: $z-index-gameover-bg;
+        position: absolute;
+        
+        .modal-content {
+            width: auto !important;
+            height: 70%;
+            border: none;
+            .gameover-image {
+                width: 40%;   
+            }
+
+            .image {
+                overflow: visible;
+            }
         }
     }
     .replayBtn {
         display: none;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        z-index: 200;
+        z-index: $z-index-replayBtn;
+        left: 40%;
+        margin-top: 3rem;
+        @include size(150px, $gameover-replayBtn);
+        background: none;
+        background-image: url('assets/images/ui/icon/replayImg.png');
+        background-repeat: no-repeat;
+        background-size: 150px $gameover-replayBtn;
+
+        border: none;
+        text-decoration: none;
+        opacity:0.4;
+        &:hover {
+            opacity: 1;
+        }
+
     }
     
 }
@@ -88,6 +192,28 @@ $topBar: 60px;
 }
 
 
-// helper class
-.is-hidden { display: none; }
-.is-show { display: block; }
+
+// for scale animation.
+.grow { 
+    transition: all .2s ease-in-out;
+    transform: scale(1.1); 
+    &:hover{ transform: scale(1.1);  } 
+}
+
+.rotate15 {
+    transition: all .2s ease-in-out;
+    transition-delay: 0.3s;
+    &:hover{ transform: rotateZ(-15deg); }
+}
+   
+
+
+@keyframes changeTextOpacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .4;
+  }
+}
+
