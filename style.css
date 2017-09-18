@@ -5741,7 +5741,7 @@ label.panel-block {
     display: none;
     background-color: white;
     opacity: .8;
-    transition: all 2s ease-in-out; }
+    animation: changeModalOpacity 2s ease-in-out alternate infinite both; }
 
 #loading {
   display: none;
@@ -5831,10 +5831,19 @@ label.panel-block {
   .rotate15:hover {
     transform: rotateZ(-15deg); }
 
+.move-to-right {
+  transition: all 2s ease-in-out;
+  transform: translateX(1000px); }
+
 @keyframes changeTextOpacity {
   from {
     opacity: 1; }
   to {
     opacity: .4; } }
+@keyframes changeModalOpacity {
+  from {
+    opacity: .4; }
+  to {
+    opacity: 1; } }
 
 /*# sourceMappingURL=style.css.map */

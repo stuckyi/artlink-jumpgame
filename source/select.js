@@ -4,9 +4,6 @@ var selectedHero = {};
 var selectModal;
 var hole;
 
-
-
-
 var 클릭한캐릭터 = ''; // 한번 클릭
 var 선택된캐릭터 = ''; // 최종
 
@@ -18,7 +15,6 @@ function selectHero(heroName) {
     if (클릭한캐릭터 === heroName) {
         캐릭터선택여부 = true;
         선택완료효과(heroName);
-        console.log("캐릭터로 선택완료!");
         return;
     }
     switch (heroName) {
@@ -94,26 +90,53 @@ function selectInit() {
 function 선택완료효과(selectedName) {
     switch (selectedName) {
         case 'murphy':
-            console.log('선택완료효과()', selectedName);
-            hole.style('opacity', 0.1);
-            // selectModal.show();
+            SELECT_COMPLETE = true;
+            selectedHero.murphy.removeClass('rotate15');
+            selectedHero.murphy.addClass('move-to-right');
+            화면전환_선택to게임();
             break;
         case 'kitty':
-            console.log('선택완료효과()', selectedName);
+            SELECT_COMPLETE = true;
+            selectedHero.kitty.removeClass('rotate15');
+            selectedHero.kitty.addClass('move-to-right');
+            화면전환_선택to게임();
             break;
         case 'tulip':
-            console.log('선택완료효과()', selectedName);
+            SELECT_COMPLETE = true;
+            selectedHero.tulip.removeClass('rotate15');
+            selectedHero.tulip.addClass('move-to-right');
+            화면전환_선택to게임();
             break;
         case 'violet':
-            console.log('선택완료효과()', selectedName);
+            SELECT_COMPLETE = true;
+            selectedHero.violet.removeClass('rotate15');
+            selectedHero.violet.addClass('move-to-right');
+            화면전환_선택to게임();
             break;
         case 'bubblegirl':
-            console.log('선택완료효과()', selectedName);
+            SELECT_COMPLETE = true;
+            selectedHero.bubblegirl.removeClass('rotate15');
+            selectedHero.bubblegirl.addClass('move-to-right');
+            화면전환_선택to게임();
             break;
         default:
-            console.log("선택에 매칭되는 hero가 없습니다.");
+            console.log("선택에 매칭되는 selectedHero가 없습니다.");
             break;
     }
     
+}
+
+function 화면전환_선택to게임() {
+    setTimeout(function () {
+        selectModal.show();
+        setTimeout(function () {
+            GLOBAL_MODE = 'LOADING';
+            VIEWS.select.hide();
+            VIEWS.loading.show();
+            setTimeout(function () {
+                viewControl(); // LOADING TO GAME
+            }, loadingTime);
+        }, 2000);
+    }, 2000);
 }
 

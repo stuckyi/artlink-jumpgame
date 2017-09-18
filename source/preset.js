@@ -11,7 +11,7 @@ var GLOBAL_MODE = 'MAIN'; // MAIN, SELECT, GAME, RESULT.
 var SELECT_COMPLETE = false; // 선택페이지에서 선택을 완료했는지.
 var GAME_COMPLETE = false;
 
-
+var loadingTime = 3000;
 
 // 캐릭터 크기
 var characterSize = { select: 300, game: 40 };

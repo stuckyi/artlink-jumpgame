@@ -1,5 +1,5 @@
 var canvas_main, canvas_select, canvas_game, canvas_result;
-var loadingTime = 3000;
+
 var 친구들테스트 = 0;
 
 
@@ -58,12 +58,6 @@ function viewControl() {
             VIEWS.select.show();
             selectInit();
             
-            break;
-        case 'SELECT':
-            console.log("SELECT -> LOADING");
-            GLOBAL_MODE = 'LOADING';
-            VIEWS.select.hide();
-            VIEWS.loading.show();
             break;
         case 'LOADING':
             console.log("LOADING -> GAME");
