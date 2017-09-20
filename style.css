@@ -5708,16 +5708,25 @@ label.panel-block {
   #canvas-container .section-container:nth-of-type(1) {
     display: block; }
 
-#main .img-main {
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-  border: 2px solid lightsalmon;
-  text-align: center; }
-#main .clickMsg {
-  animation: changeTextOpacity .5s ease-out alternate infinite;
-  text-align: center;
-  color: red; }
+#main {
+  background-image: url(assets/images/ui/main.png);
+  background-repeat: no-repeat;
+  background-size: cover; }
+  #main .img-main {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    text-align: center; }
+  #main .img-playbtn {
+    width: 10%;
+    height: auto;
+    margin: 2rem auto;
+    text-align: center;
+    animation: changeTextOpacity 1.4s ease-out alternate infinite; }
+  #main .clickMsg {
+    animation: changeTextOpacity .5s ease-out alternate infinite;
+    text-align: center;
+    color: red; }
 
 #select {
   display: none;
@@ -5747,10 +5756,27 @@ label.panel-block {
   display: none;
   width: 100%;
   height: auto; }
-  #loading .loadingImg {
-    width: 50%;
+  #loading .hero-body {
+    padding: 0 1.5rem; }
+  #loading .loading-text-container {
+    width: 40%;
     height: auto;
     margin: 0 auto; }
+    #loading .loading-text-container img {
+      padding: 1.75rem; }
+  #loading .loadingImg {
+    width: 30%;
+    height: auto; }
+  #loading .loading-foot {
+    text-align: center;
+    margin-top: 3rem; }
+    #loading .loading-foot .description {
+      width: 50%;
+      height: auto;
+      margin-bottom: 20px; }
+    #loading .loading-foot .object {
+      width: 20%;
+      height: auto; }
 
 #game {
   width: 100%;
@@ -5796,22 +5822,26 @@ label.panel-block {
         width: 40%; }
       #game .modal .modal-content .image {
         overflow: visible; }
-  #game .replayBtn {
+  #game #replayBtn {
+    background-image: url("assets/images/ui/icon/replayImg.png");
+    left: 25%; }
+  #game #gotoHomeBtn {
+    background-image: url("assets/images/ui/icon/gotohome.png");
+    left: 55%; }
+  #game .gameoverOption {
     display: none;
     position: absolute;
     z-index: 300;
-    left: 40%;
     margin-top: 3rem;
     width: 150px;
     height: 8.75rem;
     background: none;
-    background-image: url("assets/images/ui/icon/replayImg.png");
     background-repeat: no-repeat;
-    background-size: 150px 8.75rem;
+    background-size: auto 8.75rem;
     border: none;
     text-decoration: none;
     opacity: 0.4; }
-    #game .replayBtn:hover {
+    #game .gameoverOption:hover {
       opacity: 1; }
 
 #result {
@@ -5825,6 +5855,14 @@ label.panel-block {
   .grow:hover {
     transform: scale(1.1); }
 
+.addOpacity {
+  transition: all .2s ease-in-out;
+  opacity: 0.4; }
+
+.defaultOpacity {
+  transition: all .2s ease-in-out;
+  opacity: 1; }
+
 .rotate15 {
   transition: all .2s ease-in-out;
   transition-delay: 0.3s; }
@@ -5835,6 +5873,20 @@ label.panel-block {
   transition: all 2s ease-in-out;
   transform: translateX(1000px); }
 
+#loading-1 {
+  animation: changeLoadingOpacity 1.4s ease-out alternate infinite; }
+
+#loading-2 {
+  animation: changeLoadingOpacity 1.4s ease-out alternate infinite; }
+
+#loading-3 {
+  animation: changeLoadingOpacity 1.4s ease-out alternate infinite; }
+
+@keyframes changeLoadingOpacity {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: .2; } }
 @keyframes changeTextOpacity {
   from {
     opacity: 1; }

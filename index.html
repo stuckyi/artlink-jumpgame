@@ -23,15 +23,15 @@
     <div id="canvas-container">
 
       <div id="main" class="section-container">
-        <section class="hero is-primary is-fullheight">
+        <section class="hero is-fullheight">
           <div class="hero-body">
             <div class="container">
               <p class="image">
-                <img class="img-main" src="#" alt="메인 타이틀 이미지"/>
+                <img class="img-main" src="assets/images/ui/main_title.png" alt="메인 타이틀 이미지"/>
               </p>
-              <h2 class="subtitle">
-                <p class="clickMsg">Click To Play</p>
-              </h2>
+              <p class="image">
+                <img  onClick="clickMainBtn()" class="img-playbtn" src="assets/images/ui/playbutton.png" alt="메인 타이틀 이미지"/>
+              </p>
             </div>
           </div>
         </section>
@@ -40,10 +40,6 @@
       </div>
 
       <div id="select" class="section-container">
-
-        
-
-
         <section id="hole" class="hero is-fullheight">
           <div class="hero-head columns is-centered">
             <img  src="assets/images/ui/select-title-text.png" alt="여행을 함께할 캐릭터를 골라주세요 텍스트" />  
@@ -104,9 +100,23 @@
       <div id="loading" class="section-container">
         <section class="hero is-fullheight">
           <div class="hero-body">
-            <img class="loadingImg" src="assets/images/graphic/loadingImg.png" align="middle" alt="로딩중입니다" />
+            <div class="container">
+              <div class="loading-text-container columns is-centered">
+                  <img id="loading-1" class="column is-4" src="assets/images/ui/loading/loading-1.png"  alt="로딩중" />
+                  <img id="loading-2"  class="column is-4" src="assets/images/ui/loading/loading-2.png"  alt="로딩중" />
+                  <img id="loading-3"  class="column is-4" src="assets/images/ui/loading/loading-3.png"  alt="로딩중" />
+              </div>
+
+              <p class="loading-foot">
+                <img class="description" src="assets/images/ui/loading/loading-description.png"  alt="게임 설명 텍스트" /><br/>
+                <img class="object" src="assets/images/ui/loading/loading-obj.png"  alt="마우스와 스페이스 이미지" />
+              </p>
+            </div>
             
+            <!--<img class="loadingImg" src="assets/images/graphic/loadingImg.png" align="middle" alt="로딩중입니다" />-->
+
           </div>
+         
         </section>
       </div>
 
@@ -125,8 +135,7 @@
           <div class="column is-2 is-paddingless">
             <button id="soundOnBtn" class="soundBtn" > </button>
             <button id="soundOffBtn" class="soundBtn" > </button>
-            <!--<img onClick="setSound('on')" class="option-sound" src="assets/images/ui/sound-on.png" alt="사운드 끄기" />-->
-            <!--<img class="option-sound" src="assets/images/ui/sound-off.png" alt="사운드 끄기" />-->
+            
           </div>
         </div>
 
@@ -135,12 +144,13 @@
         <div class="modal">
           <div class="modal-background"></div>
           <div class="modal-content">
-           
             <p class="image">
               <img class="gameover-img" src="assets/images/ui/gameover.png" alt="gameover">
+              <img class="gamepass-img" src="assets/images/ui/gamepass.png" alt="gamepass">
             </p>
             <p class="imgae">
-              <button id="replayBtn" class="replayBtn"> </button>
+              <button id="replayBtn" class="gameoverOption"> </button>
+              <button id="gotoHomeBtn" class="gameoverOption"> </button>
             </p>
           </div>
           

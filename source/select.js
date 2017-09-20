@@ -4,7 +4,6 @@ var selectedHero = {};
 var selectModal;
 var hole;
 
-var 클릭한캐릭터 = ''; // 한번 클릭
 var 선택된캐릭터 = ''; // 최종
 
 var 캐릭터선택여부 = false;
@@ -25,6 +24,12 @@ function selectHero(heroName) {
             selectBtn.tulip.removeClass('grow');
             selectBtn.violet.removeClass('grow');
             selectBtn.bubblegirl.removeClass('grow');
+
+            selectBtn.murphy.style('opacity', 1);
+            selectBtn.kitty.style('opacity', .4);
+            selectBtn.tulip.style('opacity', .4);
+            selectBtn.violet.style('opacity', .4);
+            selectBtn.bubblegirl.style('opacity', .4);
             break;
         case 'kitty':
             클릭한캐릭터 = 'kitty';    
@@ -33,6 +38,12 @@ function selectHero(heroName) {
             selectBtn.tulip.removeClass('grow');
             selectBtn.violet.removeClass('grow');
             selectBtn.bubblegirl.removeClass('grow');
+
+            selectBtn.murphy.style('opacity', .4);
+            selectBtn.kitty.style('opacity', 1);
+            selectBtn.tulip.style('opacity', .4);
+            selectBtn.violet.style('opacity', .4);
+            selectBtn.bubblegirl.style('opacity', .4);
             break;
         case 'tulip':
             클릭한캐릭터 = 'tulip';    
@@ -41,6 +52,13 @@ function selectHero(heroName) {
             selectBtn.kitty.removeClass('grow');
             selectBtn.violet.removeClass('grow');
             selectBtn.bubblegirl.removeClass('grow');
+
+            selectBtn.murphy.style('opacity', .4);
+            selectBtn.kitty.style('opacity', .4);
+            selectBtn.tulip.style('opacity', 1);
+            selectBtn.violet.style('opacity', .4);
+            selectBtn.bubblegirl.style('opacity', .4);
+
             break;
         case 'violet':
             클릭한캐릭터 = 'violet';    
@@ -49,6 +67,12 @@ function selectHero(heroName) {
             selectBtn.kitty.removeClass('grow');
             selectBtn.tulip.removeClass('grow');
             selectBtn.bubblegirl.removeClass('grow');
+
+            selectBtn.murphy.style('opacity', .4);
+            selectBtn.kitty.style('opacity', .4);
+            selectBtn.tulip.style('opacity', .4);
+            selectBtn.violet.style('opacity', 1);
+            selectBtn.bubblegirl.style('opacity', .4);
             break;
         case 'bubblegirl':
             클릭한캐릭터 = 'bubblegirl';    
@@ -57,6 +81,13 @@ function selectHero(heroName) {
             selectBtn.kitty.removeClass('grow');
             selectBtn.tulip.removeClass('grow');
             selectBtn.violet.removeClass('grow');
+
+            selectBtn.murphy.style('opacity', .4);
+            selectBtn.kitty.style('opacity', .4);
+            selectBtn.tulip.style('opacity', .4);
+            selectBtn.violet.style('opacity', .4);
+            selectBtn.bubblegirl.style('opacity', 1);
+
             break;
         default:
             console.log("선택에 매칭되는 hero가 없습니다.");
@@ -82,41 +113,28 @@ function selectInit() {
     // select page modal bg
     selectModal = select('.select-modal'); 
 
-    // hole select element.
-    hole = select("#hole");
-
 }
 
 function 선택완료효과(selectedName) {
     switch (selectedName) {
         case 'murphy':
             SELECT_COMPLETE = true;
-            selectedHero.murphy.removeClass('rotate15');
-            selectedHero.murphy.addClass('move-to-right');
             화면전환_선택to게임();
             break;
         case 'kitty':
             SELECT_COMPLETE = true;
-            selectedHero.kitty.removeClass('rotate15');
-            selectedHero.kitty.addClass('move-to-right');
             화면전환_선택to게임();
             break;
         case 'tulip':
             SELECT_COMPLETE = true;
-            selectedHero.tulip.removeClass('rotate15');
-            selectedHero.tulip.addClass('move-to-right');
             화면전환_선택to게임();
             break;
         case 'violet':
             SELECT_COMPLETE = true;
-            selectedHero.violet.removeClass('rotate15');
-            selectedHero.violet.addClass('move-to-right');
             화면전환_선택to게임();
             break;
         case 'bubblegirl':
             SELECT_COMPLETE = true;
-            selectedHero.bubblegirl.removeClass('rotate15');
-            selectedHero.bubblegirl.addClass('move-to-right');
             화면전환_선택to게임();
             break;
         default:
@@ -127,6 +145,7 @@ function 선택완료효과(selectedName) {
 }
 
 function 화면전환_선택to게임() {
+    선택캐릭터이미지추가(); // 게임 초기 설정
     setTimeout(function () {
         selectModal.show();
         setTimeout(function () {
@@ -136,7 +155,7 @@ function 화면전환_선택to게임() {
             setTimeout(function () {
                 viewControl(); // LOADING TO GAME
             }, loadingTime);
-        }, 2000);
-    }, 2000);
+        }, 화면전환시간);
+    }, 화면전환시간);
 }
 

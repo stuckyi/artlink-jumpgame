@@ -1,8 +1,9 @@
+var gotoHomeBtn; // 홈으로 이동버튼
 var replayBg; // 죽었을 때 나타나는 까만 반투명 배경
 var replayBtn; // 다시 시작하기 버튼
 var replayModal; // 죽었을 때 보게되는 모달창
 var topBarHeight = 60; // 상단 바 높이
-
+var isFinishSet = false; // 피니시 위치 수정 했는지 여부.
 var soundOffBtn, soundOnBtn;
 
 
@@ -25,7 +26,9 @@ function gameSetup() {
     CANVAS.game.position(0, topBarHeight);
     CANVAS.game.parent(VIEWS.game);
     점수.현재 = 0; // point = 0;
-    캐릭터초기설정();
+    
+    캐릭터Init();
+    finishInit();
     
     파이프그룹 = new Group();
     친구들그룹 = new Group();
@@ -41,7 +44,29 @@ function gameSetup() {
 }
 
 
+function finishInit() {
+    피니시정보.크기 = { w: 400, h: 400 };
+    피니시정보.위치 = { x: 1000000, y: height / 2 };
+    피니시 = createSprite(피니시정보.위치.x, 피니시정보.위치.y, 피니시정보.크기.w, 피니시정보.크기.h); 
+
+    피니시.setCollider('circle', 0, 0, 200);
+    피니시.addImage(피니시이미지);
+}
+
+
+
+
+
 function draw_친구이미지생성() {
+    // image(testFriendsArr[0].img, 친구들정보.거베라.x, 친구들정보.거베라.y, 친구들크기.w, 친구들크기.h);
+
+    if (friendsDB.length > 0) {
+        for (var di = 0; di < friendsDB.length; di++){
+            image(friendsDB[di].img, friendsDB[di].x, friendsDB[di].y, friendsDB[di].w, friendsDB[di].h);
+        }
+    }
+    
+    /*
     image(거베라이미지, 친구들정보.거베라.x, 친구들정보.거베라.y, 친구들크기.w, 친구들크기.h);
     image(거베라2이미지, 친구들정보.거베라2.x, 친구들정보.거베라2.y, 친구들크기.w, 친구들크기.h);
     image(거베라3이미지, 친구들정보.거베라3.x, 친구들정보.거베라3.y, 친구들크기.w, 친구들크기.h);
@@ -51,6 +76,7 @@ function draw_친구이미지생성() {
     image(거베라7이미지, 친구들정보.거베라7.x, 친구들정보.거베라7.y, 친구들크기.w, 친구들크기.h);
     image(거베라8이미지, 친구들정보.거베라8.x, 친구들정보.거베라8.y, 친구들크기.w, 친구들크기.h);
     image(거베라8이미지, 친구들정보.거베라9.x, 친구들정보.거베라9.y, 친구들크기.w, 친구들크기.h);
+    */
 }
 
 
@@ -60,61 +86,37 @@ function draw_친구이미지생성() {
 function draw_친구만남효과(currentX) {
     
     if (currentX % 2000 === 0) {
-        console.log("캐릭터를 만난 지점!");
         setMeetState(friendIndex);
+        onSelectedSound(friendIndex);
+        
         friendIndex++; // 친구인덱스 증가
-        if (friendIndex >= 5) {
-            isAllFriends = true;  // 모든 친구들을 만났다. }
-        }
+        if (friendIndex >= 5) { isAllFriends = true; } // 모든 친구들을 만났다. 
+    }
 
-        // 상단바의 만날친구들 아이콘 상태 변경
-        function setMeetState(findex) {
-            // 선택 -> 변경
-            var topMeetIcons = $('.meet-friend').eq(findex); // 현재 만난 친구인덱스
-            var currentSrc = topMeetIcons.attr('src');
-            var setSrc = currentSrc.split('_')[0] + '_after.png'; // 만난 후 보여져야할 이미지 src.
-            topMeetIcons.attr('src', setSrc); // 현재 이미지 src를 선택하여 변경.
-        }
-
+    // 상단바의 만날친구들 아이콘 상태 변경
+    function setMeetState(findex) {
+        // 선택 -> 변경
+        var topMeetIcons = $('.meet-friend').eq(findex); // 현재 만난 친구인덱스
+        var currentSrc = topMeetIcons.attr('src');
+        var setSrc = currentSrc.split('_')[0] + '_after.png'; // 만난 후 보여져야할 이미지 src.
+        topMeetIcons.attr('src', setSrc); // 현재 이미지 src를 선택하여 변경.
+    }
+    // 만난 친구의 음성 재생
+    function onSelectedSound(findex) {
+        
     }
 }
 
 
 
-
-
-
-
-
-
-function 캐릭터초기설정() {
+function 선택캐릭터이미지추가() {
+    console.log('클릭한 캐릭터 ', 클릭한캐릭터);
+    
     // 캐릭터 초기 설정
-    var 선택된캐릭터 = 'assets/images/characters/' + selectedCharacter + '.png';
-
-    캐릭터정보.크기 = { r: 40, w: 40, h: 40 };
-    캐릭터정보.시작점 = { x: width / 2, y: height / 2 };
+    var 선택된캐릭터 = 'assets/images/characters/' + 클릭한캐릭터 + '.png';
     캐릭터정보.이미지 = loadImage(선택된캐릭터);
-
-
-    캐릭터 = createSprite(
-        캐릭터정보.시작점.x, 캐릭터정보.시작점.y,
-        캐릭터정보.크기.r, 캐릭터정보.크기.r);
-
-    캐릭터.rotateToDirection = true;
-    캐릭터.velocity.x = VELOCITY_X;
-    캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)  
     캐릭터.addImage(캐릭터정보.이미지);
 }
-
-
-function draw_finish생성() {
-    피니시정보.크기 = { w: 100, h: 400 };
-    피니시정보.위치 = { x: 캐릭터.position.x + width, y: height / 2 };
-    피니시 = createSprite(피니시정보.위치.x, 피니시정보.위치.y, 피니시정보.크기.w, 피니시정보.크기.h); 
-    피니시.setCollider('circle', 0, 0, 50);
-    피니시.add(피니시이미지);
-}
-
 
 
 
@@ -132,7 +134,16 @@ function 게임플레이() {
 
         // 충돌감지
         if (캐릭터.overlap(파이프그룹)) { die(); }
-        if (isAllFriends === false) { draw_친구만남효과(캐릭터.position.x); }  // 모든 친구를 만나지 않았다면
+        if (!isAllFriends) { draw_친구만남효과(캐릭터.position.x); }  // 모든 친구를 만나지 않았다면
+        if (isAllFriends) {
+            if (!isFinishSet) { // 아직 피니시의 위치가 설정되지 않았다면
+                console.log("모든 친구를 만났기에, 피니시의 위치를 적당한곳으로 옮겨본다.");
+                피니시.position.x = 캐릭터.position.x + width + 2000; // 피니시 obj 위치 변경
+                isFinishSet = true;
+            } else { // 이미 피니시의 위치를 설정했다면, 충돌 감지를 시작한다.
+                if (캐릭터.overlap(피니시)) { 게임완료(); }
+            }
+        }
 
     
 
@@ -212,19 +223,39 @@ function draw_친구들생성() {
             캐릭터.position.x + width, height / 2, 40);
     }
 }
-function die() {
-    noLoop();               // for test
 
-    점수.최근 = 점수.현재;      // 점수 저장
-    점수.현재 = 0;            // 현재 점수 초기화
+
+function die() {
+    noLoop();             
+    updateSprites(false);
+    gameOver = true;
+    switch (클릭한캐릭터) {
+        case 'murphy': 효과.사운드.die.murphy.play(); break;
+        case 'kitty': 효과.사운드.die.kitty.play(); break;
+        case 'tulip': 효과.사운드.die.tulip.play(); break;
+        case 'violet': 효과.사운드.die.violet.play(); break;
+        case 'bubblegirl': 효과.사운드.die.bubblegirl.play(); break;
+        default:
+            console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
+            효과.사운드.die.default.play();
+            break;
+    }
+
+    다시하기버튼설정('die');
+}
+
+
+
+
+function 게임완료() {
+    noLoop();               // for test
 
     updateSprites(false);
     gameOver = true;
-
-
-    if (isSound === true) { 효과.사운드.die.play(); }
-    다시하기버튼설정();
+    // if (isSound === true) { 효과.사운드.die.default.play(); }
+    다시하기버튼설정('complete');
 }
+
 
 
 function 새게임시작() {
@@ -252,9 +283,18 @@ function 새게임시작() {
 // 게임 실행 중 클릭 시 발생하는 작업들
 function gameClickEffect() {
     캐릭터.velocity.y = FLAP;
-    점수.현재++;                // 점프 할 때마다 기본 점수 추가
-    if(isSound){ 효과.사운드.점프.play(); } // 점프 할 때마다 실행할 사운드 효과
     
+    switch (클릭한캐릭터) {
+        case 'murphy': 효과.사운드.점프.murphy.play(); break;
+        case 'kitty': 효과.사운드.점프.kitty.play(); break;
+        case 'tulip': 효과.사운드.점프.tulip.play(); break;
+        case 'violet': 효과.사운드.점프.violet.play(); break;
+        case 'bubblegirl': 효과.사운드.점프.bubblegirl.play(); break;
+        default:
+            console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
+            효과.사운드.점프.default.play();
+            break;
+    }
 }
 
 
@@ -285,7 +325,11 @@ function 사운드off() {
 
 
 
-function 다시하기버튼설정() {
+function 다시하기버튼설정(state) {
+    gotoHomeBtn = select('#gotoHomeBtn');
+    gotoHomeBtn.show();
+    gotoHomeBtn.mousePressed(홈버튼클릭);
+
     replayBtn = select('#replayBtn');
     replayBtn.mousePressed(다시하기버튼클릭);
     replayBtn.show();
@@ -293,15 +337,39 @@ function 다시하기버튼설정() {
     replayModal = select('.modal');
     replayModal.addClass('is-active');
 
+    var gameoverImg = select('.gameover-img');
+    var gamepassImg = select('.gamepass-img');
+
+    if (state === 'die') {
+        gameoverImg.show();
+        gamepassImg.hide();
+    } else {
+        gamepassImg.show();
+        gameoverImg.hide();
+    }
 }
 
+function 홈버튼클릭() {
+    replayBtn.hide();
+    gotoHomeBtn.hide();
+    replayModal.removeClass('is-active');
+    만난친구들상태리셋();
+    finishReset();
 
+    window.location.reload();
+}
 function 다시하기버튼클릭() {
     새게임시작();
     replayBtn.hide();
+    gotoHomeBtn.hide();
     replayModal.removeClass('is-active');
     만난친구들상태리셋();
+    finishReset();
+}
 
+function finishReset() {
+    isFinishSet = false;
+    피니시.position.x = 100000;
 }
 
 
