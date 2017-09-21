@@ -16,16 +16,13 @@ var isAllFriends = false; // 모든 친구들을 다 만났는지
 
 function gameSetup() {
     console.log('gameSetup()');
-
     console.log(browserSize.h - topBarHeight);
 
     CANVAS.game = createCanvas(browserSize.w, browserSize.h - topBarHeight);
     CANVAS.game.position(0, topBarHeight);
     CANVAS.game.parent(VIEWS.game);
-    
-    
+
     캐릭터Init();
-    
     finishInit();
     
     파이프그룹 = new Group();
@@ -55,7 +52,6 @@ function finishInit() {
 function draw_친구이미지생성() {
     if (friendsDB.length > 0) {
         for (var di = 0; di < friendsDB.length; di++){
-            // 캐릭터 이미지
             image(friendsDB[di].img, friendsDB[di].x, friendsDB[di].y, friendsDB[di].w, friendsDB[di].h);
         }
     }
@@ -68,7 +64,7 @@ function draw_친구이미지생성() {
 // 친구를 만났을 때 캐릭터가 보여줄 효과
 function draw_친구만남효과(currentX) {
     
-    if (currentX % 친구들간격 === 0) {
+    if (currentX % (친구들간격-200) === 0) {
         setMeetState(friendIndex);
         if(GLOBAL_SOUND === true){ onSelectedSound(friendIndex); } 
         
@@ -167,9 +163,6 @@ function 캐릭터Init() {
     캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)  
 }
 
-
-
-
 function draw_지나친요소제거() {
     // 지나친 파이프 제거하기
     for (var i = 0; i < 파이프그룹.length; i++) {
@@ -233,14 +226,8 @@ function 새게임시작() {
     캐릭터.position.x = width / 2;
     캐릭터.position.y = height / 2;
     캐릭터.velocity.y = 0;
-
-
-
-
     
     loop();                     // 루프 시작
-
-    
 }
 
 

@@ -155,11 +155,13 @@ $select-frame-size-hover : 26rem;
 
         background-image: url(assets/images/ui/topbar.png);
         background-repeat: no-repeat;
-        background-size: 110% $topBar;
+        // background-size: auto $topBar;
         
-        border: none;
+        
+        border: 2px solid red;
+
         .meet {  @include size(auto, $top-text-height); }
-        .meet-friend { @include size(auto, $top-icon-height); vertical-align: middle; }
+        .meet-friend { @include size(auto, $top-icon-height); vertical-align: middle;  }
 
 
         .soundBtn {

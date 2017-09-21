@@ -5778,8 +5778,7 @@ label.panel-block {
     left: 0;
     background-image: url(assets/images/ui/topbar.png);
     background-repeat: no-repeat;
-    background-size: 110% 60px;
-    border: none; }
+    border: 2px solid red; }
     #game .topBar .meet {
       width: auto;
       height: 2rem; }

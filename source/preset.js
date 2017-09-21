@@ -30,7 +30,7 @@ var FLAP = -7;
 var GROUND_Y = 450;
 var MIN_OPENING = 300;
 
-var VELOCITY_X = 10;
+var VELOCITY_X = 8;
 var 물리학 = { 중력: 0.3, 점프: -7 };
 
 // 캐릭터 설정
@@ -42,8 +42,6 @@ var 캐릭터이미지, 파이프이미지, 땅이미지, 배경이미지, 피�
 
 var 클릭한캐릭터 = '';
 
-var testImg;
-var wordBalloonsDB = []; 
 
 
 // 피니시정보
@@ -55,7 +53,6 @@ var 파이프그룹;
 
 var baseUrl = {
   img: 'assets/images/friends/',
-  wordballoon: 'assets/images/friends/wordballoons/',
   sound: 'assets/sound/greet/'
 };
 
@@ -68,6 +65,7 @@ var 친구들;
 var 친구들크기 = { w: 329, h: 608 };
 var 친구들위치 = { y: browserSize.h / 8 };
 var 친구들간격 = 3000;
+var 친구들인사시작점 = (친구들간격 - 300); // 만나기 조금 전에 액션 시작위함
 
 // 친구들정보 Arr version. 14
 var friendsDB = [
@@ -147,29 +145,17 @@ function preload() {
     배경이미지 = loadImage(지형지물.배경.imgUrl);
     피니시이미지 = loadImage(지형지물.피니시.imgUrl); 
   
-    // testImg = createImg(baseUrl.img + 'rabins.png');
-    // testImg.addClass('testImg');
-  
-    
-
-  
     
     // 친구들 DB에 P5Image, P5Sound 객체 추가
     for (var dbi = 0; dbi < friendsDB.length; dbi++){
       var eachImgUrl = baseUrl.img + friendsDB[dbi].name_eng + '.png';
       var eachSoundUrl = baseUrl.sound + friendsDB[dbi].name_eng + '.ogg';
       
-      var eachWordBalloonUrl = baseUrl.wordballoon + friendsDB[dbi].name_eng + '.png';
-      console.log(eachWordBalloonUrl);
-      var eachWordBalloonImg = createImg(eachWordBalloonUrl);
       
       // 친구들 이미지
       friendsDB[dbi].x = (dbi + 1) * 친구들간격;
       friendsDB[dbi].img = loadImage(eachImgUrl);
       friendsDB[dbi].greet = loadSound(eachSoundUrl);
-
-      // 친구들 말풍선
-      wordBalloonsDB.push(eachWordBalloonImg);
     }
     
 }
