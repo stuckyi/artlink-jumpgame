@@ -12,9 +12,7 @@ function setup() {
     
     gameSetup(); // 게임 초기 설정
 
-    setTimeout(function () { 
-        효과.사운드.bgm.default.play(); // BGM 재생
-    }, 2000);
+    // setTimeout(function () {  효과.사운드.bgm.default.play(); // BGM 재생 }, 2000);
 }
 
 

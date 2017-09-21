@@ -24,6 +24,8 @@ function gameSetup() {
 
     캐릭터Init();
     finishInit();
+    // 땅 = createSprite(400, GROUND_Y + 100);
+    // 땅.addImage(땅이미지);
     
     파이프그룹 = new Group();
     친구들그룹 = new Group();
@@ -34,6 +36,79 @@ function gameSetup() {
     // 카메라위치 초기화
     camera.position.y = height/2;
 }
+
+
+
+
+function 게임플레이() {
+    if (!gameOver) {
+        캐릭터.velocity.y += 물리학.중력;
+
+        // LIFE LINE: BOTTOM
+        if (캐릭터.position.y < 0) { 캐릭터.position.y = 0; }
+        if (캐릭터.position.y > height) { die(); }
+
+        // 충돌감지
+        if (캐릭터.overlap(파이프그룹)) { die(); }
+        if (!isAllFriends) { draw_친구만남효과(캐릭터.position.x); }  // 모든 친구를 만나지 않았다면
+        if (isAllFriends) {
+            if (!isFinishSet) { // 아직 피니시의 위치가 설정되지 않았다면
+                피니시.position.x = 캐릭터.position.x + width + 2000; // 피니시 obj 위치 변경
+                isFinishSet = true;
+            } else { // 이미 피니시의 위치를 설정했다면, 충돌 감지를 시작한다.
+                if (캐릭터.overlap(피니시)) { 게임완료(); }
+            }
+        }
+
+    
+
+        // 맵에 새로운 요소 생성  
+        draw_파이프생성();
+        draw_친구이미지생성();
+        draw_지나친요소제거();
+
+        // 캐릭터위치 변경에 따른 카메라 시점 변경
+        camera.position.x = 캐릭터.position.x + width / 4;
+        
+        //wrap 땅
+        if (camera.position.x > 땅.position.x - 땅.width + width / 2) {
+            console.log("Warp!");
+            console.log("땅.position.x", 땅.position.x);
+            console.log("땅.width", 땅.width);
+            땅.position.x += 800;
+        }
+    
+
+
+        // 카메라 설정
+        camera.off();
+        camera.on();
+
+        drawSprites(파이프그룹);
+        drawSprite(땅);
+        drawSprite(캐릭터); // bird
+        drawSprite(피니시);
+        
+
+    }
+}
+
+
+
+function 캐릭터Init() {
+    console.log("캐릭터Init()", 클릭한캐릭터);
+    캐릭터정보.크기 = { r: 40, w: 40, h: 40 };
+    캐릭터정보.시작점 = { x: width / 2, y: height / 2 };
+    
+    캐릭터 = createSprite(
+        캐릭터정보.시작점.x, 캐릭터정보.시작점.y,
+        캐릭터정보.크기.r, 캐릭터정보.크기.r);
+
+    캐릭터.rotateToDirection = true;
+    캐릭터.velocity.x = VELOCITY_X;
+    캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)  
+}
+
 
 
 function finishInit() {
@@ -99,69 +174,6 @@ function 선택캐릭터이미지추가() {
 
 
 
-
-
-function 게임플레이() {
-    if (gameOver && keyWentDown('x')) { 새게임시작(); }
-
-    if (!gameOver) {
-    
-        if (keyWentDown('x')) { 캐릭터.velocity.y = FLAP; }
-        캐릭터.velocity.y += 물리학.중력;
-
-        // LIFE LINE: BOTTOM
-        if (캐릭터.position.y < 0) { 캐릭터.position.y = 0; }
-        if (캐릭터.position.y > height) { die(); }
-
-        // 충돌감지
-        if (캐릭터.overlap(파이프그룹)) { die(); }
-        if (!isAllFriends) { draw_친구만남효과(캐릭터.position.x); }  // 모든 친구를 만나지 않았다면
-        if (isAllFriends) {
-            if (!isFinishSet) { // 아직 피니시의 위치가 설정되지 않았다면
-                console.log("모든 친구를 만났기에, 피니시의 위치를 적당한곳으로 옮겨본다.");
-                피니시.position.x = 캐릭터.position.x + width + 2000; // 피니시 obj 위치 변경
-                isFinishSet = true;
-            } else { // 이미 피니시의 위치를 설정했다면, 충돌 감지를 시작한다.
-                if (캐릭터.overlap(피니시)) { 게임완료(); }
-            }
-        }
-
-    
-
-        // 맵에 새로운 요소 생성  
-        draw_파이프생성();
-        draw_친구이미지생성();
-        draw_지나친요소제거();
-
-        // 캐릭터위치 변경에 따른 카메라 시점 변경
-        camera.position.x = 캐릭터.position.x + width / 4;
-
-        // 카메라 설정
-        camera.off();
-        camera.on();
-
-        drawSprites(파이프그룹);
-        drawSprite(캐릭터); // bird
-        drawSprite(피니시);
-        
-
-    }
-}
-
-
-
-function 캐릭터Init() {
-    캐릭터정보.크기 = { r: 40, w: 40, h: 40 };
-    캐릭터정보.시작점 = { x: width / 2, y: height / 2 };
-    
-    캐릭터 = createSprite(
-        캐릭터정보.시작점.x, 캐릭터정보.시작점.y,
-        캐릭터정보.크기.r, 캐릭터정보.크기.r);
-
-    캐릭터.rotateToDirection = true;
-    캐릭터.velocity.x = VELOCITY_X;
-    캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)  
-}
 
 function draw_지나친요소제거() {
     // 지나친 파이프 제거하기

@@ -1,20 +1,50 @@
 // preset.js 에서는 setup 전 해두어야할 작업들을 처리한다.
 
-var browserSize = { w: window.innerWidth, h: window.innerHeight }; // 브라우저 
-var topBarHeight = 60; // 상단 바 높이
 
-var isSound = true;
-var VIEWS = {};
-var CANVAS = {}; // game.
+
+// 콘텐츠 전역 상태 설정
 
 var GLOBAL_MODE = 'MAIN'; // MAIN, SELECT, GAME, RESULT.
 var GLOBAL_SOUND = true; // 전체 사운드
 var SELECT_COMPLETE = false; // 선택페이지에서 선택을 완료했는지.
 var GAME_COMPLETE = false;
+var isSound = true;
 
+
+
+
+// UI 관련 설정
+
+var browserSize = { w: window.innerWidth, h: window.innerHeight }; // 브라우저 
+var topBarHeight = 60; // 상단 바 높이
+
+var VIEWS = {};
+var CANVAS = {}; 
 
 var 화면전환시간 = 100;
 var loadingTime = 3000;
+
+
+
+
+// 게임 원리 설정
+
+var GRAVITY = 0.3;
+var FLAP = -7;
+var GROUND_Y = 450;
+var MIN_OPENING = 300;
+
+var VELOCITY_X = 9;
+var 물리학 = { 중력: 0.3, 점프: -6 };
+
+
+
+
+
+// 캐릭터 설정
+var 캐릭터;
+var 캐릭터정보 = {};
+var 캐릭터이미지;
 
 var characterSize = { select: 300, game: 40 }; // 캐릭터 크기
 
@@ -25,21 +55,6 @@ var characterPos = {
 }; 
 
 
-var GRAVITY = 0.3;
-var FLAP = -7;
-var GROUND_Y = 450;
-var MIN_OPENING = 300;
-
-var VELOCITY_X = 8;
-var 물리학 = { 중력: 0.3, 점프: -7 };
-
-// 캐릭터 설정
-var 캐릭터;
-var 캐릭터정보 = {};
-var 캐릭터이미지, 파이프이미지, 땅이미지, 배경이미지, 피니시이미지;
-
-
-
 var 클릭한캐릭터 = '';
 
 
@@ -48,7 +63,16 @@ var 클릭한캐릭터 = '';
 
 var 피니시;
 var 피니시정보 = {};
+var 피니시이미지;
 
+
+
+
+
+// 파이프
+
+var 파이프이미지;
+var 파이프크기 = { w: 80, h: 392 }; // 392는 파이프 이미지의 높이
 var 파이프그룹;
 
 var baseUrl = {
@@ -57,15 +81,44 @@ var baseUrl = {
 };
 
 
-// 친구들 설정
-var 친구들그룹; // for Obstacle
-var 친구들;
+// 기타 UI 소스
+var 땅;
+var 땅이미지, 배경이미지;
 
+// 지형지물
+var 지형지물 = {
+  땅: {  imgUrl: 'assets/images/ui/ground1920.png', 너비:1920, 높이:200 },
+  // 파이프: { imgUrl: 'assets/source/p5play/flappy_pipe.png', 너비: 100, 높이: 100 }, // 80X392
+  파이프: {  imgUrl: 'assets/images/graphic/flower.png', 너비: 100, 높이: 100 }, // 80X392
+  배경: { imgUrl: 'assets/images/graphic/backgroundImage.png', 너비: 100, 높이: 100 },
+  피니시: { imgUrl: 'assets/images/ui/game/finish.png', 너비: 100, 높이: 100 }
+};
+
+
+
+// 사운드 관리 설정
+
+var 효과 = {
+  사운드: {}
+}; 
+
+
+
+
+
+
+// 친구들 설정
+
+var 친구들그룹;
+var 친구들;
 
 var 친구들크기 = { w: 329, h: 608 };
 var 친구들위치 = { y: browserSize.h / 8 };
 var 친구들간격 = 3000;
 var 친구들인사시작점 = (친구들간격 - 300); // 만나기 조금 전에 액션 시작위함
+
+
+
 
 // 친구들정보 Arr version. 14
 var friendsDB = [
@@ -90,23 +143,14 @@ var friendIndexMax = friendsDB.length;  // 친구들 총 수
 
 
 
-// Sound
-var 효과 = {
-  사운드: {}
-}; // .사운드
 
-// 지형지물
-var 지형지물 = {
-  땅: {  imgUrl: 'assets/source/p5play/flappy_ground.png', x: 0, y: 450 },
-  // 파이프: { imgUrl: 'assets/source/p5play/flappy_pipe.png', 너비: 100, 높이: 100 }, // 80X392
-  파이프: {  imgUrl: 'assets/images/graphic/flower.png', 너비: 100, 높이: 100 }, // 80X392
-  배경: { imgUrl: 'assets/images/graphic/backgroundImage.png', 너비: 100, 높이: 100 },
-  피니시: { imgUrl: 'assets/images/ui/game/finish.png', 너비: 100, 높이: 100 }
-};
+
+
 
 
 function preload() {  
-    console.log("preload() start.");
+  console.log("preload() start.");
+  
     setContainer(); 
 
     
@@ -116,7 +160,7 @@ function preload() {
       default: loadSound('assets/sound/jump/default.ogg'),
       murphy: loadSound('assets/sound/jump/murphy.ogg'),
       kitty: loadSound('assets/sound/jump/kitty.ogg'),
-      tulip: loadSound('assets/sound/jump/tulip.ogg'),
+      tulip: loadSound('assets/sound/jump/tulip.ogg', function (jump) { jump.setVolume(0.4); }),
       violet: loadSound('assets/sound/jump/violet.ogg'),
       bubblegirl: loadSound('assets/sound/jump/bubblegirl.ogg')
     };
@@ -136,13 +180,16 @@ function preload() {
         violet: loadSound('assets/sound/start/violet.ogg'),
         bubblegirl: loadSound('assets/sound/start/bubblegirl.ogg')
     };
-    효과.사운드.bgm = { default: loadSound('assets/sound/bgm/default.ogg') };
+    효과.사운드.bgm = {};
+    효과.사운드.bgm.default = loadSound('assets/sound/bgm/default.ogg', function (sound) { sound.play();});
+
   
     
     // 지형지물 이미지
     console.log("지형지물 이미지 로딩");
     파이프이미지 = loadImage(지형지물.파이프.imgUrl);
     배경이미지 = loadImage(지형지물.배경.imgUrl);
+    땅이미지 = loadImage(지형지물.땅.imgUrl);
     피니시이미지 = loadImage(지형지물.피니시.imgUrl); 
   
     
@@ -160,6 +207,12 @@ function preload() {
     
 }
 
+
+
+
+
+
+
 // 각 캔버스의 container를 select.
 function setContainer() {
     VIEWS.main = select("#main");
@@ -169,6 +222,10 @@ function setContainer() {
     VIEWS.result = select("#result");
    
 }
+
+
+
+
 
 
 function soundControll(soundState) {
@@ -183,7 +240,4 @@ function soundControll(soundState) {
     GLOBAL_SOUND = false;
     효과.사운드.bgm.default.pause(); // BGM 재생
   }
-  
-
-  
 }
