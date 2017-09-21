@@ -25,6 +25,7 @@ function gameSetup() {
     
     
     캐릭터Init();
+    
     finishInit();
     
     파이프그룹 = new Group();
@@ -54,6 +55,7 @@ function finishInit() {
 function draw_친구이미지생성() {
     if (friendsDB.length > 0) {
         for (var di = 0; di < friendsDB.length; di++){
+            // 캐릭터 이미지
             image(friendsDB[di].img, friendsDB[di].x, friendsDB[di].y, friendsDB[di].w, friendsDB[di].h);
         }
     }
@@ -81,6 +83,7 @@ function draw_친구만남효과(currentX) {
         var currentSrc = topMeetIcons.attribute('src');
         var setSrc = currentSrc.split('_')[0] + '_after.png';
         topMeetIcons.attribute('src', setSrc); // 현재 이미지 src를 선택하여 변경.
+      
     }
     // 만난 친구의 음성 재생
     function onSelectedSound(findex) {
@@ -92,12 +95,13 @@ function draw_친구만남효과(currentX) {
 
 function 선택캐릭터이미지추가() {
     console.log('클릭한 캐릭터 ', 클릭한캐릭터);
-    
     // 캐릭터 초기 설정
     var 선택된캐릭터 = 'assets/images/characters/' + 클릭한캐릭터 + '.png';
     캐릭터정보.이미지 = loadImage(선택된캐릭터);
     캐릭터.addImage(캐릭터정보.이미지);
 }
+
+
 
 
 
@@ -150,6 +154,22 @@ function 게임플레이() {
 
 
 
+function 캐릭터Init() {
+    캐릭터정보.크기 = { r: 40, w: 40, h: 40 };
+    캐릭터정보.시작점 = { x: width / 2, y: height / 2 };
+    
+    캐릭터 = createSprite(
+        캐릭터정보.시작점.x, 캐릭터정보.시작점.y,
+        캐릭터정보.크기.r, 캐릭터정보.크기.r);
+
+    캐릭터.rotateToDirection = true;
+    캐릭터.velocity.x = VELOCITY_X;
+    캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)  
+}
+
+
+
+
 function draw_지나친요소제거() {
     // 지나친 파이프 제거하기
     for (var i = 0; i < 파이프그룹.length; i++) {
@@ -190,20 +210,6 @@ function draw_파이프생성() {
 
 
 
-function draw_친구들생성() {
-    if (frameCount % 60 == 0) {
-        var 친구 = createSprite(캐릭터.position.x + width, height / 2, 40, 40);
-        친구.addImage(쵸파이미지);
-        친구들그룹.add(친구);
-
-        // 생성한 친구 요소와 캐릭터의 충돌을 개별 감지하기위한 테스트 170912  
-        hit = collideCircleCircle(
-            캐릭터.position.x, 캐릭터.position.y, 40,
-            캐릭터.position.x + width, height / 2, 40);
-    }
-}
-
-
 
 
 function 게임완료() {
@@ -230,23 +236,11 @@ function 새게임시작() {
 
 
 
+
     
     loop();                     // 루프 시작
 
-    if (GLOBAL_MODE === 'GAME' && GLOBAL_SOUND === true) {
-        switch (클릭한캐릭터) {
-        case 'murphy': 효과.사운드.start.murphy.play(); break;
-        case 'kitty': 효과.사운드.start.kitty.play(); break;
-        case 'tulip': 효과.사운드.start.tulip.play(); break;
-        case 'violet': 효과.사운드.start.violet.play(); break;
-        case 'bubblegirl': 효과.사운드.start.bubblegirl.play(); break;
-        default:
-            console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
-            효과.사운드.start.default.play();
-            break;
-        }
-        
-    }
+    
 }
 
 
@@ -288,6 +282,7 @@ function 홈버튼클릭() {
 function 다시하기버튼클릭() {
     모든요소리셋();
     새게임시작();
+    시작인사();
 }
 
 
@@ -322,6 +317,22 @@ function 만난친구들상태리셋() {
 
 
 
+function 시작인사() {
+    
+    if (GLOBAL_MODE === 'GAME' && GLOBAL_SOUND === true) {
+        switch (클릭한캐릭터) {
+        case 'murphy': 효과.사운드.start.murphy.play(); break;
+        case 'kitty': 효과.사운드.start.kitty.play(); break;
+        case 'tulip': 효과.사운드.start.tulip.play(); break;
+        case 'violet': 효과.사운드.start.violet.play(); break;
+        case 'bubblegirl': 효과.사운드.start.bubblegirl.play(); break;
+        default:
+            console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
+            효과.사운드.start.default.play();
+            break;
+        }
+    }
+}
 
 
 

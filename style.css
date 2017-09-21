@@ -5703,15 +5703,14 @@ label.panel-block {
     margin: 0 auto;
     text-align: center; }
   #main .img-playbtn {
-    width: 10%;
+    width: 20%;
     height: auto;
     margin: 2rem auto;
     text-align: center;
-    animation: changeTextOpacity 1.4s ease-out alternate infinite; }
+    animation: changeTextOpacity .8s ease-out alternate infinite; }
   #main .clickMsg {
-    animation: changeTextOpacity .5s ease-out alternate infinite;
-    text-align: center;
-    color: red; }
+    animation: changeTextOpacity .3s ease-out alternate infinite;
+    text-align: center; }
 
 #select {
   display: none;
@@ -5767,6 +5766,9 @@ label.panel-block {
   width: 100%;
   height: auto;
   display: none; }
+  #game .testImg {
+    opacity: .4;
+    border: 2px solid red; }
   #game .topBar {
     width: 100%;
     height: 60px;

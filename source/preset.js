@@ -42,6 +42,10 @@ var 캐릭터이미지, 파이프이미지, 땅이미지, 배경이미지, 피�
 
 var 클릭한캐릭터 = '';
 
+var testImg;
+var wordBalloonsDB = []; 
+
+
 // 피니시정보
 
 var 피니시;
@@ -51,6 +55,7 @@ var 파이프그룹;
 
 var baseUrl = {
   img: 'assets/images/friends/',
+  wordballoon: 'assets/images/friends/wordballoons/',
   sound: 'assets/sound/greet/'
 };
 
@@ -141,15 +146,30 @@ function preload() {
     파이프이미지 = loadImage(지형지물.파이프.imgUrl);
     배경이미지 = loadImage(지형지물.배경.imgUrl);
     피니시이미지 = loadImage(지형지물.피니시.imgUrl); 
+  
+    // testImg = createImg(baseUrl.img + 'rabins.png');
+    // testImg.addClass('testImg');
+  
+    
+
+  
     
     // 친구들 DB에 P5Image, P5Sound 객체 추가
     for (var dbi = 0; dbi < friendsDB.length; dbi++){
       var eachImgUrl = baseUrl.img + friendsDB[dbi].name_eng + '.png';
       var eachSoundUrl = baseUrl.sound + friendsDB[dbi].name_eng + '.ogg';
       
+      var eachWordBalloonUrl = baseUrl.wordballoon + friendsDB[dbi].name_eng + '.png';
+      console.log(eachWordBalloonUrl);
+      var eachWordBalloonImg = createImg(eachWordBalloonUrl);
+      
+      // 친구들 이미지
       friendsDB[dbi].x = (dbi + 1) * 친구들간격;
       friendsDB[dbi].img = loadImage(eachImgUrl);
       friendsDB[dbi].greet = loadSound(eachSoundUrl);
+
+      // 친구들 말풍선
+      wordBalloonsDB.push(eachWordBalloonImg);
     }
     
 }

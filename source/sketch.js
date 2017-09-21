@@ -60,23 +60,10 @@ function viewControl() {
             VIEWS.game.show();
             GLOBAL_MODE = 'GAME';
             새게임시작();
+            시작인사();
             break;
         default:
             console.log("viewControl default!");
             break;
     }
-}
-
-function 캐릭터Init() {
-    캐릭터정보.크기 = { r: 40, w: 40, h: 40 };
-    캐릭터정보.시작점 = { x: width / 2, y: height / 2 };
-    
-    캐릭터 = createSprite(
-        캐릭터정보.시작점.x, 캐릭터정보.시작점.y,
-        캐릭터정보.크기.r, 캐릭터정보.크기.r);
-
-    캐릭터.rotateToDirection = true;
-    캐릭터.velocity.x = VELOCITY_X;
-    캐릭터.setCollider('circle', 0, 0, 20); // setCollider("circle", offsetX, offsetY, radius)  
-  
 }
