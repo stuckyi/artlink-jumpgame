@@ -22,7 +22,6 @@ function draw() {
     image(배경이미지, (캐릭터.position.x - width / 4) - 10, 0, browserSize.w, browserSize.h - topBarHeight);
     
     if (GLOBAL_MODE === 'GAME') {
-        친구들테스트 = 0;
         게임플레이();
     }
 }

@@ -8,16 +8,15 @@ var VIEWS = {};
 var CANVAS = {}; // game.
 
 var GLOBAL_MODE = 'MAIN'; // MAIN, SELECT, GAME, RESULT.
+var GLOBAL_SOUND = true; // 전체 사운드
 var SELECT_COMPLETE = false; // 선택페이지에서 선택을 완료했는지.
 var GAME_COMPLETE = false;
 
-// var loadingTime = 200000;
-// var 화면전환시간 = 2000; 
+
 var 화면전환시간 = 100;
 var loadingTime = 3000;
 
-// 캐릭터 크기
-var characterSize = { select: 300, game: 40 };
+var characterSize = { select: 300, game: 40 }; // 캐릭터 크기
 
 // 캐릭터 위치
 var characterPos = {
@@ -32,16 +31,11 @@ var GROUND_Y = 450;
 var MIN_OPENING = 300;
 
 var VELOCITY_X = 10;
-
-
-var 점수 = { 현재: 0, 최고: 0, 최근: 0 };
-
 var 물리학 = { 중력: 0.3, 점프: -7 };
 
 // 캐릭터 설정
 var 캐릭터;
 var 캐릭터정보 = {};
-
 var 캐릭터이미지, 파이프이미지, 땅이미지, 배경이미지, 피니시이미지;
 
 
@@ -68,51 +62,30 @@ var 친구들;
 
 var 친구들크기 = { w: 329, h: 608 };
 var 친구들위치 = { y: browserSize.h / 8 };
-var 친구들간격 = 2000;
-var 친구들정보 = {
-  daroni: { 이름: '다롱이',  imgUrl: 'assets/images/friends/gerbera.png', x: 1*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  deiji: { 이름: '데이지', imgUrl: 'assets/images/friends/gerbera.png', x: 2*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  didi: { 이름: '디디', imgUrl: 'assets/images/friends/gerbera.png', x: 3*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  dino: { 이름: '디노', imgUrl: 'assets/images/friends/gerbera.png', x: 4*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  galic: { 이름: '갈릭', imgUrl: 'assets/images/friends/gerbera.png', x: 5*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  gomdori: { 이름: '곰돌이', imgUrl: 'assets/images/friends/gerbera.png', x: 6*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  gomsuni: { 이름: '곰순이', imgUrl: 'assets/images/friends/gerbera.png', x: 7*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  igochoopda: { 이름: '아이고춥다', imgUrl: 'assets/images/friends/gerbera.png', x: 8*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  nana: { 이름: '나나', imgUrl: 'assets/images/friends/gerbera.png', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  puppy: { 이름: '퍼피', imgUrl: 'assets/images/friends/gerbera.png', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  rabins: { 이름: '라빈스', imgUrl: 'assets/images/friends/gerbera.png', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  rori: { 이름: '로리', imgUrl: 'assets/images/friends/gerbera.png', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  rose: { 이름: '로즈', imgUrl: 'assets/images/friends/gerbera.png', x: 9*친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  rosehip: { 이름: '로즈힙', imgUrl: 'assets/images/friends/gerbera.png', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h }
-};
-
-
+var 친구들간격 = 3000;
 
 // 친구들정보 Arr version. 14
 var friendsDB = [
-  { name: '다롱이', name_eng: 'darongi', x: 1 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '데이지', name_eng: 'deiji',  x: 2 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '딜', name_eng: 'dill',   x: 3 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '디노', name_eng: 'dino', x: 4 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '갈릭', name_eng: 'galic',  x: 5 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '곰돌이', name_eng: 'gomdori', x: 6 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '곰순이', name_eng: 'gomsuni',  x: 7 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '아이고춥다', name_eng: 'igochoopda', x: 8 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '나나', name_eng: 'nana', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '퍼피', name_eng: 'puppy', x: 10 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '라빈스', name_eng: 'rabins',x: 11 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '로리', name_eng: 'rori', x: 12 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '로즈', name_eng: 'rose', x: 13 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { name: '로즈힙', name_eng: 'rosehip', x: 14 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h }
+  { name: '다롱이', name_eng: 'darongi', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '데이지', name_eng: 'deiji', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '딜', name_eng: 'dill',   y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '디노', name_eng: 'dino', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '갈릭', name_eng: 'galic',  y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '곰돌이', name_eng: 'gomdori',  y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '곰순이', name_eng: 'gomsuni',  y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '아이고춥다', name_eng: 'igochoopda', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '나나', name_eng: 'nana',  y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '퍼피', name_eng: 'puppy', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '라빈스', name_eng: 'rabins', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '로리', name_eng: 'rori', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '로즈', name_eng: 'rose', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '로즈힙', name_eng: 'rosehip', y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h }
 ];
 
 var friendIndex = 0; // 친구들 인덱스
 var friendIndexMax = friendsDB.length;  // 친구들 총 수
 
 
-//
-// Resource
-//
 
 // Sound
 var 효과 = {
@@ -173,7 +146,8 @@ function preload() {
     for (var dbi = 0; dbi < friendsDB.length; dbi++){
       var eachImgUrl = baseUrl.img + friendsDB[dbi].name_eng + '.png';
       var eachSoundUrl = baseUrl.sound + friendsDB[dbi].name_eng + '.ogg';
-
+      
+      friendsDB[dbi].x = (dbi + 1) * 친구들간격;
       friendsDB[dbi].img = loadImage(eachImgUrl);
       friendsDB[dbi].greet = loadSound(eachSoundUrl);
     }
@@ -190,3 +164,20 @@ function setContainer() {
    
 }
 
+
+function soundControll(soundState) {
+  
+  if (soundState === 'on') {
+    console.log("sound on!");
+    GLOBAL_SOUND = true;
+    효과.사운드.bgm.default.play(); // BGM 재생
+  }
+  else if (soundState === 'off') {
+    console.log("sound off!");
+    GLOBAL_SOUND = false;
+    효과.사운드.bgm.default.pause(); // BGM 재생
+  }
+  
+
+  
+}

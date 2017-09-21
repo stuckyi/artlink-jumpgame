@@ -19,7 +19,11 @@
     </style>
   </head>
   <body>
-
+    <!--sound controller -->
+    <div id="soundController" class="column is-2">
+      <img onClick="soundControll('on')" class="soundBtn" src="assets/images/ui/sound-on.png" alt="sound on button"/>
+      <img onClick="soundControll('off')" class="soundBtn" src="assets/images/ui/sound-off.png" alt="sound off button" >
+    </div>
     <div id="canvas-container">
 
       <div id="main" class="section-container">
@@ -125,7 +129,7 @@
           <div class="column is-2 is-paddingless">
             <img class="meet" src="assets/images/ui/meet.png" alt="만난친구들" />
           </div>
-          <div class="column is-8 is-paddingless">
+          <div class="column is-8">
             <img class="meet-friend" src="assets/images/ui/icon/darongi_before.png" alt="다롱이" />
             <img class="meet-friend" src="assets/images/ui/icon/deiji_before.png" alt="데이지" />
             <img class="meet-friend" src="assets/images/ui/icon/dill_before.png" alt="딜" />
@@ -143,11 +147,12 @@
             <img class="meet-friend" src="assets/images/ui/icon/rose_before.png" alt="로즈" />
             <img class="meet-friend" src="assets/images/ui/icon/rosehip_before.png" alt="로즈힙" />
           </div>
-          <div class="column is-2 is-paddingless">
-            <button id="soundOnBtn" class="soundBtn" > </button>
-            <button id="soundOffBtn" class="soundBtn" > </button>
-            
-          </div>
+
+          <!-- sound control -->
+          <!--<div class="column is-2">
+            <img (onClick)="soundControll('on')" class="soundBtn" src="assets/images/ui/sound-on.png" alt="sound on button"/>
+            <img (onClick)="soundControll('off')" class="soundBtn" src="assets/images/ui/sound-off.png" alt="sound off button" >
+          </div>-->
         </div>
 
         <!--<div class="gameover-bg">&nbsp; </div>-->

@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+
+@mixin px2rem($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
 @mixin size($width, $height: $width) {
   width: $width;
   height: $height;

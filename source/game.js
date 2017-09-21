@@ -22,7 +22,7 @@ function gameSetup() {
     CANVAS.game = createCanvas(browserSize.w, browserSize.h - topBarHeight);
     CANVAS.game.position(0, topBarHeight);
     CANVAS.game.parent(VIEWS.game);
-    점수.현재 = 0; // point = 0;
+    
     
     캐릭터Init();
     finishInit();
@@ -66,9 +66,9 @@ function draw_친구이미지생성() {
 // 친구를 만났을 때 캐릭터가 보여줄 효과
 function draw_친구만남효과(currentX) {
     
-    if (currentX % 2000 === 0) {
+    if (currentX % 친구들간격 === 0) {
         setMeetState(friendIndex);
-        onSelectedSound(friendIndex);
+        if(GLOBAL_SOUND === true){ onSelectedSound(friendIndex); } 
         
         friendIndex++; // 친구인덱스 증가
         if (friendIndex >= friendIndexMax) { isAllFriends = true; } // 모든 친구들을 만났다. 
@@ -77,10 +77,10 @@ function draw_친구만남효과(currentX) {
     // 상단바의 만날친구들 아이콘 상태 변경
     function setMeetState(findex) {
         // 선택 -> 변경
-        var topMeetIcons = $('.meet-friend').eq(findex); // 현재 만난 친구인덱스
-        var currentSrc = topMeetIcons.attr('src');
-        var setSrc = currentSrc.split('_')[0] + '_after.png'; // 만난 후 보여져야할 이미지 src.
-        topMeetIcons.attr('src', setSrc); // 현재 이미지 src를 선택하여 변경.
+        var topMeetIcons = selectAll('.meet-friend')[findex];
+        var currentSrc = topMeetIcons.attribute('src');
+        var setSrc = currentSrc.split('_')[0] + '_after.png';
+        topMeetIcons.attribute('src', setSrc); // 현재 이미지 src를 선택하여 변경.
     }
     // 만난 친구의 음성 재생
     function onSelectedSound(findex) {
@@ -191,9 +191,7 @@ function draw_파이프생성() {
 
 
 function draw_친구들생성() {
-    // console.log("친구들 생성!", frameCount);
     if (frameCount % 60 == 0) {
-        console.log("친구들 생성!");
         var 친구 = createSprite(캐릭터.position.x + width, height / 2, 40, 40);
         친구.addImage(쵸파이미지);
         친구들그룹.add(친구);
@@ -203,26 +201,6 @@ function draw_친구들생성() {
             캐릭터.position.x, 캐릭터.position.y, 40,
             캐릭터.position.x + width, height / 2, 40);
     }
-}
-
-
-function die() {
-    noLoop();             
-    updateSprites(false);
-    gameOver = true;
-    switch (클릭한캐릭터) {
-        case 'murphy': 효과.사운드.die.murphy.play(); break;
-        case 'kitty': 효과.사운드.die.kitty.play(); break;
-        case 'tulip': 효과.사운드.die.tulip.play(); break;
-        case 'violet': 효과.사운드.die.violet.play(); break;
-        case 'bubblegirl': 효과.사운드.die.bubblegirl.play(); break;
-        default:
-            console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
-            효과.사운드.die.default.play();
-            break;
-    }
-
-    다시하기버튼설정('die');
 }
 
 
@@ -250,30 +228,26 @@ function 새게임시작() {
     캐릭터.position.y = height / 2;
     캐릭터.velocity.y = 0;
 
+
+
     
     loop();                     // 루프 시작
-}
 
-
-
-// 게임 실행 중 클릭 시 발생하는 작업들
-function gameClickEffect() {
-    캐릭터.velocity.y = FLAP;
-    
-    // 점프 사운드
-    switch (클릭한캐릭터) {
-        case 'murphy': 효과.사운드.점프.murphy.play(); break;
-        case 'kitty': 효과.사운드.점프.kitty.play(); break;
-        case 'tulip': 효과.사운드.점프.tulip.play(); break;
-        case 'violet': 효과.사운드.점프.violet.play(); break;
-        case 'bubblegirl': 효과.사운드.점프.bubblegirl.play(); break;
+    if (GLOBAL_MODE === 'GAME' && GLOBAL_SOUND === true) {
+        switch (클릭한캐릭터) {
+        case 'murphy': 효과.사운드.start.murphy.play(); break;
+        case 'kitty': 효과.사운드.start.kitty.play(); break;
+        case 'tulip': 효과.사운드.start.tulip.play(); break;
+        case 'violet': 효과.사운드.start.violet.play(); break;
+        case 'bubblegirl': 효과.사운드.start.bubblegirl.play(); break;
         default:
             console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
-            효과.사운드.점프.default.play();
+            효과.사운드.start.default.play();
             break;
+        }
+        
     }
 }
-
 
 
 function 다시하기버튼설정(state) {
@@ -345,6 +319,62 @@ function 만난친구들상태리셋() {
 }
 
 
+
+
+
+
+
+
+
+
+// 게임 실행 중 클릭 시 발생하는 작업들
+function gameClickEffect() {
+    if (GLOBAL_MODE === 'GAME') {
+        캐릭터.velocity.y = FLAP;
+        if (GLOBAL_SOUND === true && gameOver === false) {
+            // 점프 사운드
+            switch (클릭한캐릭터) {
+                case 'murphy': 효과.사운드.점프.murphy.play(); break;
+                case 'kitty': 효과.사운드.점프.kitty.play(); break;
+                case 'tulip': 효과.사운드.점프.tulip.play(); break;
+                case 'violet': 효과.사운드.점프.violet.play(); break;
+                case 'bubblegirl': 효과.사운드.점프.bubblegirl.play(); break;
+                default:
+                    console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
+                    효과.사운드.점프.default.play();
+                    break;
+            }
+            
+        }
+        
+        
+    }
+    
+}
+
+
+
+function die() {
+    noLoop();             
+    updateSprites(false);
+    gameOver = true;
+
+    if (GLOBAL_MODE === 'GAME' && GLOBAL_SOUND === true) {
+        switch (클릭한캐릭터) {
+        case 'murphy': 효과.사운드.die.murphy.play(); break;
+        case 'kitty': 효과.사운드.die.kitty.play(); break;
+        case 'tulip': 효과.사운드.die.tulip.play(); break;
+        case 'violet': 효과.사운드.die.violet.play(); break;
+        case 'bubblegirl': 효과.사운드.die.bubblegirl.play(); break;
+        default:
+            console.log("클릭이벤트에 해당하는 hero가 없습니다", 클릭한캐릭터);
+            효과.사운드.die.default.play();
+            break;
+        }
+        
+    }
+    다시하기버튼설정('die');
+}
 
 
 

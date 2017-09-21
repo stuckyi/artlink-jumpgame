@@ -5683,6 +5683,11 @@ label.panel-block {
   padding: 4rem auto;
   overflow: hidden; }
 
+#soundController {
+  z-index: 9999;
+  position: absolute;
+  right: 0; }
+
 #canvas-container .section-container {
   display: none; }
   #canvas-container .section-container:nth-of-type(1) {
@@ -5776,21 +5781,21 @@ label.panel-block {
     #game .topBar .meet {
       width: auto;
       height: 2rem; }
-    #game .topBar .meet-friends {
+    #game .topBar .meet-friend {
       width: auto;
-      height: 1.875rem; }
+      height: 1.8rem;
+      vertical-align: middle; }
     #game .topBar .soundBtn {
       position: absolute;
-      width: 1.875rem;
-      height: 1.875rem;
+      width: 1.8rem;
+      height: 1.8rem;
       border: none;
       background-repeat: no-repeat;
-      background-size: auto 1.875rem;
-      text-decoration: none; }
-    #game .topBar #soundOnBtn {
-      background-image: url(assets/images/ui/sound-on.png); }
-    #game .topBar #soundOffBtn {
-      background-image: url(assets/images/ui/sound-off.png); }
+      background-size: auto 1.8rem;
+      text-decoration: none;
+      opacity: 0.4; }
+      #game .topBar .soundBtn:hover {
+        opacity: 1; }
   #game .modal {
     z-index: 200;
     position: absolute; }
@@ -5805,9 +5810,13 @@ label.panel-block {
   #game #replayBtn {
     background-image: url("assets/images/ui/icon/replayImg.png");
     left: 25%; }
+    #game #replayBtn:hover {
+      opacity: 1; }
   #game #gotoHomeBtn {
     background-image: url("assets/images/ui/icon/gotohome.png");
     left: 55%; }
+    #game #gotoHomeBtn:hover {
+      opacity: 1; }
   #game .gameoverOption {
     display: none;
     position: absolute;
@@ -5821,8 +5830,6 @@ label.panel-block {
     border: none;
     text-decoration: none;
     opacity: 0.4; }
-    #game .gameoverOption:hover {
-      opacity: 1; }
 
 #result {
   width: 100%;
