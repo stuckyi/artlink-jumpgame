@@ -69,7 +69,7 @@ function 게임플레이() {
 
         // 캐릭터위치 변경에 따른 카메라 시점 변경
         camera.position.x = 캐릭터.position.x + width / 4;
-        
+        /*
         //wrap 땅
         if (camera.position.x > 땅.position.x - 땅.width + width / 2) {
             console.log("Warp!");
@@ -77,6 +77,7 @@ function 게임플레이() {
             console.log("땅.width", 땅.width);
             땅.position.x += 800;
         }
+        */
     
 
 
@@ -85,7 +86,7 @@ function 게임플레이() {
         camera.on();
 
         drawSprites(파이프그룹);
-        drawSprite(땅);
+        // drawSprite(땅);
         drawSprite(캐릭터); // bird
         drawSprite(피니시);
         
