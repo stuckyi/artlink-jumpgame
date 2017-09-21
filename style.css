@@ -5639,32 +5639,12 @@ label.panel-block {
   background-color: whitesmoke;
   padding: 3rem 1.5rem 6rem; }
 
-@font-face {
-  font-family: "Spoqa Han Sans";
-  font-weight: 100;
-  src: local("☺"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Thin.eot), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Thin.eot?#iefix) format("embedded-opentype"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Thin.woff) format("woff"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Thin.ttf) format("truetype");
-  /* If not support woff */ }
-@font-face {
-  font-family: "Spoqa Han Sans";
-  font-weight: 300;
-  src: local("☺"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Light.eot), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Light.eot?#iefix) format("embedded-opentype"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Light.woff) format("woff"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Light.ttf) format("truetype");
-  /* If not support woff */ }
-@font-face {
-  font-family: "Spoqa Han Sans";
-  font-weight: 500;
-  src: local("☺"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Regular.eot), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Regular.eot?#iefix) format("embedded-opentype"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Regular.woff) format("woff"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Regular.ttf) format("truetype");
-  /* If not support woff */ }
-@font-face {
-  font-family: "Spoqa Han Sans";
-  font-weight: 700;
-  src: local("☺"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Bold.eot), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Bold.eot?#iefix) format("embedded-opentype"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Bold.woff) format("woff"), url(/assets/fonts/spocahansans_subset/SpoqaHanSans-Bold.ttf) format("truetype");
-  /* If not support woff */ }
 * {
   font-family: Arial, sans-serif; }
 
 @media (min-width: 769px) {
   * {
-    font-family: "Spoqa Han Sans", Apple SD Gothic Neo, Nanum Barun Gothic, Nanum Gothic, "돋움", Dotum, Verdana, Arial, sans-serif; } }
+    font-family: "돋움", Dotum, Verdana, Arial, sans-serif; } }
 /* color */
 .no-padding-top {
   padding-top: 0; }

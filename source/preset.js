@@ -55,6 +55,12 @@ var 피니시정보 = {};
 
 var 파이프그룹;
 
+var baseUrl = {
+  img: 'assets/images/friends/',
+  sound: 'assets/sound/greet/'
+};
+
+
 // 친구들 설정
 var 친구들그룹; // for Obstacle
 var 친구들;
@@ -80,36 +86,29 @@ var 친구들정보 = {
   rosehip: { 이름: '로즈힙', imgUrl: 'assets/images/friends/gerbera.png', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h }
 };
 
-// 친구들정보 Arr version.
+
+
+// 친구들정보 Arr version. 14
 var friendsDB = [
-  { 이름: '다롱이', name_eng: 'darongi', x: 1 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '데이지', name_eng: 'deiji',  x: 2 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '디디', name_eng: 'didi',   x: 3 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '디노', name_eng: 'dino', x: 4 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '갈릭', name_eng: 'galic',  x: 5 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '곰돌이', name_eng: 'gomdori', x: 6 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '곰순이', name_eng: 'gomsuni',  x: 7 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '아이고춥다', name_eng: 'igochoopda', x: 8 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '나나', name_eng: 'nana', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '퍼피', name_eng: 'puppy', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '라빈스', name_eng: 'rabins',x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '로리', name_eng: 'rori', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '로즈', name_eng: 'rose', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
-  { 이름: '로즈힙', name_eng: 'rosehip', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h }
+  { name: '다롱이', name_eng: 'darongi', x: 1 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '데이지', name_eng: 'deiji',  x: 2 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '딜', name_eng: 'dill',   x: 3 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '디노', name_eng: 'dino', x: 4 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '갈릭', name_eng: 'galic',  x: 5 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '곰돌이', name_eng: 'gomdori', x: 6 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '곰순이', name_eng: 'gomsuni',  x: 7 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '아이고춥다', name_eng: 'igochoopda', x: 8 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '나나', name_eng: 'nana', x: 9 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '퍼피', name_eng: 'puppy', x: 10 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '라빈스', name_eng: 'rabins',x: 11 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '로리', name_eng: 'rori', x: 12 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '로즈', name_eng: 'rose', x: 13 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h },
+  { name: '로즈힙', name_eng: 'rosehip', x: 14 * 친구들간격, y: 친구들위치.y, w: 친구들크기.w, h: 친구들크기.h }
 ];
 
-var 거베라이미지,
-  거베라2이미지,
-  거베라3이미지,
-  거베라4이미지,
-  거베라5이미지,
-  거베라6이미지,
-  거베라7이미지,
-  거베라8이미지,
-  거베라9이미지;
+var friendIndex = 0; // 친구들 인덱스
+var friendIndexMax = friendsDB.length;  // 친구들 총 수
 
-
-var testFriendsArr = [];
 
 //
 // Resource
@@ -128,9 +127,6 @@ var 지형지물 = {
   배경: { imgUrl: 'assets/images/graphic/backgroundImage.png', 너비: 100, 높이: 100 },
   피니시: { imgUrl: 'assets/images/ui/game/finish.png', 너비: 100, 높이: 100 }
 };
-
-
-
 
 
 function preload() {  
@@ -166,25 +162,6 @@ function preload() {
     };
     효과.사운드.bgm = { default: loadSound('assets/sound/bgm/default.ogg') };
   
-    효과.사운드.greet = {
-      default: loadSound('assets/sound/greet/default.ogg'),
-      darongi: loadSound('assets/sound/greet/darongi.ogg'),
-      deigi: loadSound('assets/sound/greet/deiji.ogg'),
-      didi: loadSound('assets/sound/greet/didi.ogg'),
-      dino: loadSound('assets/sound/greet/dino.ogg'),
-      galic: loadSound('assets/sound/greet/galic.ogg'),
-      gomdori: loadSound('assets/sound/greet/gomdori.ogg'),
-      gomsuni: loadSound('assets/sound/greet/gomsuni.ogg'),
-      igochoopda: loadSound('assets/sound/greet/igochoopda.ogg'),
-      nana: loadSound('assets/sound/greet/nana.ogg'),
-      rabins: loadSound('assets/sound/greet/rabins.ogg'),
-      rori: loadSound('assets/sound/greet/rori.ogg'),
-      rose: loadSound('assets/sound/greet/rose.ogg'),
-      rosehip: loadSound('assets/sound/greet/rosehip.ogg')
-    };
-
-
-
     
     // 지형지물 이미지
     console.log("지형지물 이미지 로딩");
@@ -192,17 +169,7 @@ function preload() {
     배경이미지 = loadImage(지형지물.배경.imgUrl);
     피니시이미지 = loadImage(지형지물.피니시.imgUrl); 
     
-    
-    
-    // 친구들 배열 관리 테스트 시작
-    
-    
-    // 친구 객체에 P5Image 정보 추가
-    var baseUrl = {
-      img: 'assets/images/friends/',
-      sound: 'assets/sound/greet/'
-    };
-  
+    // 친구들 DB에 P5Image, P5Sound 객체 추가
     for (var dbi = 0; dbi < friendsDB.length; dbi++){
       var eachImgUrl = baseUrl.img + friendsDB[dbi].name_eng + '.png';
       var eachSoundUrl = baseUrl.sound + friendsDB[dbi].name_eng + '.ogg';
@@ -211,40 +178,10 @@ function preload() {
       friendsDB[dbi].greet = loadSound(eachSoundUrl);
     }
     
-
-
-  
-    // 친구들 배열 관리 테스트 끝 
-
-
-    // 친구들 이미지
-    console.log("친구들 이미지 로딩");
-  /*
-    거베라이미지 = loadImage(친구들정보.거베라.imgUrl);
-    거베라2이미지 = loadImage(친구들정보.거베라2.imgUrl);
-    거베라3이미지 = loadImage(친구들정보.거베라3.imgUrl);
-    거베라4이미지 = loadImage(친구들정보.거베라4.imgUrl);
-    거베라5이미지 = loadImage(친구들정보.거베라5.imgUrl);
-    거베라6이미지 = loadImage(친구들정보.거베라6.imgUrl);
-    거베라7이미지 = loadImage(친구들정보.거베라7.imgUrl);
-    거베라8이미지 = loadImage(친구들정보.거베라8.imgUrl);
-    거베라9이미지 = loadImage(친구들정보.거베라9.imgUrl);
-  
-    
-  
-    testFriendsArr.push(친구들정보.다롱이);
-  
-  */
-
-  
-    
-  
-
 }
 
 // 각 캔버스의 container를 select.
 function setContainer() {
-
     VIEWS.main = select("#main");
     VIEWS.select = select("#select");
     VIEWS.loading = select("#loading");

@@ -10,11 +10,8 @@ var soundOffBtn, soundOnBtn;
 // 게임 옵션
 var gameOver;
 var selectedCharacter = 'kitty'; //default character.
-var friendIndex = 0; // 친구들 인덱스
+
 var isAllFriends = false; // 모든 친구들을 다 만났는지
-
-
-
 
 
 function gameSetup() {
@@ -36,11 +33,8 @@ function gameSetup() {
     gameOver = true;
     updateSprites(false);
 
-        
-
     // 카메라위치 초기화
     camera.position.y = height/2;
-    // soundOption(); //사운드 켜기
 }
 
 
@@ -58,25 +52,12 @@ function finishInit() {
 
 
 function draw_친구이미지생성() {
-    // image(testFriendsArr[0].img, 친구들정보.거베라.x, 친구들정보.거베라.y, 친구들크기.w, 친구들크기.h);
-
     if (friendsDB.length > 0) {
         for (var di = 0; di < friendsDB.length; di++){
             image(friendsDB[di].img, friendsDB[di].x, friendsDB[di].y, friendsDB[di].w, friendsDB[di].h);
         }
     }
-    
-    /*
-    image(거베라이미지, 친구들정보.거베라.x, 친구들정보.거베라.y, 친구들크기.w, 친구들크기.h);
-    image(거베라2이미지, 친구들정보.거베라2.x, 친구들정보.거베라2.y, 친구들크기.w, 친구들크기.h);
-    image(거베라3이미지, 친구들정보.거베라3.x, 친구들정보.거베라3.y, 친구들크기.w, 친구들크기.h);
-    image(거베라4이미지, 친구들정보.거베라4.x, 친구들정보.거베라4.y, 친구들크기.w, 친구들크기.h);
-    image(거베라5이미지, 친구들정보.거베라5.x, 친구들정보.거베라5.y, 친구들크기.w, 친구들크기.h);
-    image(거베라6이미지, 친구들정보.거베라6.x, 친구들정보.거베라6.y, 친구들크기.w, 친구들크기.h);
-    image(거베라7이미지, 친구들정보.거베라7.x, 친구들정보.거베라7.y, 친구들크기.w, 친구들크기.h);
-    image(거베라8이미지, 친구들정보.거베라8.x, 친구들정보.거베라8.y, 친구들크기.w, 친구들크기.h);
-    image(거베라8이미지, 친구들정보.거베라9.x, 친구들정보.거베라9.y, 친구들크기.w, 친구들크기.h);
-    */
+
 }
 
 
@@ -90,7 +71,7 @@ function draw_친구만남효과(currentX) {
         onSelectedSound(friendIndex);
         
         friendIndex++; // 친구인덱스 증가
-        if (friendIndex >= 5) { isAllFriends = true; } // 모든 친구들을 만났다. 
+        if (friendIndex >= friendIndexMax) { isAllFriends = true; } // 모든 친구들을 만났다. 
     }
 
     // 상단바의 만날친구들 아이콘 상태 변경
@@ -103,7 +84,7 @@ function draw_친구만남효과(currentX) {
     }
     // 만난 친구의 음성 재생
     function onSelectedSound(findex) {
-        
+        friendsDB[findex].greet.play();
     }
 }
 
@@ -249,10 +230,8 @@ function die() {
 
 function 게임완료() {
     noLoop();               // for test
-
     updateSprites(false);
     gameOver = true;
-    // if (isSound === true) { 효과.사운드.die.default.play(); }
     다시하기버튼설정('complete');
 }
 
@@ -263,19 +242,16 @@ function 새게임시작() {
     파이프그룹.removeSprites();
     친구들그룹.removeSprites();
 
-    // 게임오버 상태 변경
-    gameOver = false;
-
-    // 스프라이트 이미지 업데이트
-    updateSprites(true);
+    gameOver = false;           // 게임오버 상태 변경
+    updateSprites(true);        // 스프라이트 이미지 업데이트
 
     // 캐릭터 위치&속도 리셋  
     캐릭터.position.x = width / 2;
     캐릭터.position.y = height / 2;
     캐릭터.velocity.y = 0;
 
-    // 루프 시작
-    loop();
+    
+    loop();                     // 루프 시작
 }
 
 
@@ -284,6 +260,7 @@ function 새게임시작() {
 function gameClickEffect() {
     캐릭터.velocity.y = FLAP;
     
+    // 점프 사운드
     switch (클릭한캐릭터) {
         case 'murphy': 효과.사운드.점프.murphy.play(); break;
         case 'kitty': 효과.사운드.점프.kitty.play(); break;
@@ -299,37 +276,14 @@ function gameClickEffect() {
 
 
 
-function 사운드버튼설정() {
-    soundOnBtn = select("#soundOnBtn");
-    // soundOnBtn.mousePressed(사운드on);
-
-    soundOffBtn = select("#soundOffBtn");
-    // soundOnBtn.mousePressed(사운드off);
-}
-
-
-function setSound(state) {
-    if (state === 'on') { isSound = true; }
-    else { isSound = false; }
-}
-
-function 사운드on() {
-    console.log("사운드on!!");
-    isSound = true;
-}
-
-function 사운드off() {
-    isSound = false;
-}
-
-
-
-
 function 다시하기버튼설정(state) {
+    // 홈 버튼 설정
     gotoHomeBtn = select('#gotoHomeBtn');
     gotoHomeBtn.show();
     gotoHomeBtn.mousePressed(홈버튼클릭);
 
+
+    // 다시하기 버튼 설정    
     replayBtn = select('#replayBtn');
     replayBtn.mousePressed(다시하기버튼클릭);
     replayBtn.show();
@@ -337,9 +291,12 @@ function 다시하기버튼설정(state) {
     replayModal = select('.modal');
     replayModal.addClass('is-active');
 
+
+    // 게임오버, 게임 완료 이미지 선택
     var gameoverImg = select('.gameover-img');
     var gamepassImg = select('.gamepass-img');
-
+    
+    // 게임오버, 게임 완료 이미지 설정
     if (state === 'die') {
         gameoverImg.show();
         gamepassImg.hide();
@@ -350,22 +307,24 @@ function 다시하기버튼설정(state) {
 }
 
 function 홈버튼클릭() {
-    replayBtn.hide();
-    gotoHomeBtn.hide();
-    replayModal.removeClass('is-active');
-    만난친구들상태리셋();
-    finishReset();
+    모든요소리셋();
+    window.location.reload();           // 새로고침
+}
 
-    window.location.reload();
-}
 function 다시하기버튼클릭() {
+    모든요소리셋();
     새게임시작();
+}
+
+
+function 모든요소리셋() {
     replayBtn.hide();
     gotoHomeBtn.hide();
     replayModal.removeClass('is-active');
     만난친구들상태리셋();
     finishReset();
 }
+
 
 function finishReset() {
     isFinishSet = false;
@@ -373,16 +332,20 @@ function finishReset() {
 }
 
 
-function 만난친구들상태리셋() {
-    console.log('만난친구들상태리셋');
-    friendIndex = 0; // 친구인덱스 리셋
 
-    $('.meet-friend').each(function () {
-        var icon = $(this);
-        var currentSrc = icon.attr('src');
-        var resetSrc = currentSrc.split('_')[0] + '_before.png'; // 만난 후 보여져야할 이미지 src.
-        icon.attr('src', resetSrc); // 현재 이미지 src를 선택하여 변경. 
-    });
+
+function 만난친구들상태리셋() {
+    friendIndex = 0; // 친구인덱스 리셋
+    var allFriendsBtn = selectAll('.meet-friend');
+    for (var alli = 0; alli < allFriendsBtn.length; alli++){
+        var rowImgUrl = 'assets/images/ui/icon/' + friendsDB[alli].name_eng + '_before.png';
+        var rowTopIcon = allFriendsBtn[alli];
+        rowTopIcon.attribute('src', rowImgUrl);
+    }
 }
+
+
+
+
 
 
